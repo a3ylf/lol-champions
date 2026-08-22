@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoL Champions - Ganhei ou Não?</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0a1428;
+    color: #f0e6d2;
+    min-height: 100vh;
+    padding: 24px;
+  }
+  h1 {
+    text-align: center;
+    color: #c8aa6e;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+  }
+  .controles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  #pesquisa {
+    padding: 12px 18px;
+    width: 320px;
+    max-width: 100%;
+    border-radius: 4px;
+    border: 1px solid #785a28;
+    background: #091428;
+    color: #f0e6d2;
+    font-size: 1rem;
+    outline: none;
+  }
+  #pesquisa:focus { border-color: #c8aa6e; }
+  .filtros button, .acoes button {
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid #785a28;
+    background: #1e2328;
+    color: #f0e6d2;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  .filtros button.ativo { background: #c8aa6e; color: #091428; font-weight: bold; }
+  .filtros button:hover, .acoes button:hover { border-color: #c8aa6e; }
+  .placar {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #a09b8c;
+    margin-bottom: 20px;
+  }
+  .placar b { color: #c8aa6e; }
+  .barra {
+    max-width: 600px;
+    height: 10px;
+    background: #1e2328;
+    border-radius: 5px;
+    margin: 0 auto 24px;
+    overflow: hidden;
+  }
+  .barra > div {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #785a28, #c8aa6e);
+    transition: width .4s;
+  }
+  .grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    background: #1e2328;
+    transition: transform .15s, border-color .15s;
+    user-select: none;
+  }
+  .card:hover { transform: scale(1.05); z-index: 1; }
+  .card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+  .card span {
+    display: block;
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .card.ganhou { border-color: #2ec4b6; box-shadow: 0 0 10px rgba(46,196,182,.5); }
+  .badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+  .ganhou .badge { background: #2ec4b6; }
+  .vazio { text-align: center; color: #a09b8c; margin-top: 40px; grid-column: 1/-1; }
+  .carregando { text-align: center; color: #c8aa6e; margin-top: 60px; font-size: 1.1rem; }
+</style>
+</head>
+<body>
+<h1>Ganhei com todos?</h1>
+
+<div class="controles">
+  <input id="pesquisa" type="search" placeholder="Pesquisar campeão...">
+  <div class="filtros">
+    <button data-filtro="todos" class="ativo">Todos</button>
+    <button data-filtro="ganhou">Ganhei</button>
+    <button data-filtro="sem-marca">Falta ganhar</button>
+  </div>
+  <div class="acoes">
+    <button id="marcar-todos-ganhou">Marcar todos como ganho</button>
+    <button id="limpar">Limpar tudo</button>
+  </div>
+</div>
+
+<div class="placar" id="placar"></div>
+<div class="barra"><div id="progresso"></div></div>
+<div class="grade" id="grade"><p class="carregando">Carregando campeões...</p></div>
+
+<script>
+const API = 'https://ddragon.leagueoflegends.com';
+let campeoes = [];
+let versao = '';
+let filtro = 'todos';
+let busca = '';
+let marcas = JSON.parse(localStorage.getItem('lolMarcas') || '{}');
+
+function salvar() { localStorage.setItem('lolMarcas', JSON.stringify(marcas)); }
+
+async function carregar() {
+  try {
+    const versoes = await fetch(API + '/api/versions.json').then(r => r.json());
+    const versaoAtual = versoes[0];
+    versao = versaoAtual;
+    const dados = await fetch(`${API}/cdn/${versaoAtual}/data/pt_BR/champion.json`).then(r => r.json());
+    campeoes = Object.values(dados.data)
+      .map(c => ({ id: c.id, nome: c.name }))
+      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  } catch (e) {
+    document.getElementById('grade').innerHTML =
+      '<p class="vazio">Não foi possível carregar os campeões. Verifique sua conexão.</p>';
+    return;
+  }
+  renderizar();
+}
+
+function alternarMarca(id) {
+  if (marcas[id]) delete marcas[id];
+  else marcas[id] = 'ganhou';
+  salvar();
+}
+
+function renderizar() {
+  const grade = document.getElementById('grade');
+  const termo = busca.trim().toLowerCase();
+  const lista = campeoes.filter(c => {
+    const m = marcas[c.id] || '';
+    if (termo && !c.nome.toLowerCase().includes(termo)) return false;
+    if (filtro === 'ganhou' && m !== 'ganhou') return false;
+    if (filtro === 'sem-marca' && m) return false;
+    return true;
+  });
+
+  if (!lista.length) {
+    grade.innerHTML = '<p class="vazio">Nenhum campeão encontrado.</p>';
+  } else {
+    grade.innerHTML = lista.map(c => {
+      const m = marcas[c.id] || '';
+      const badge = m === 'ganhou' ? '<div class="badge">✔</div>' : '';
+      return `<div class="card ${m}" data-id="${c.id}">
+        <img src="${API}/cdn/${versao}/img/champion/${c.id}.png" alt="${c.nome}" loading="lazy">
+        <span>${c.nome}</span>${badge}</div>`;
+    }).join('');
+  }
+
+  const totalGanhos = campeoes.filter(c => marcas[c.id] === 'ganhou').length;
+  const pct = campeoes.length ? (totalGanhos / campeoes.length * 100).toFixed(1) : 0;
+  document.getElementById('placar').innerHTML =
+    `Ganhos: <b>${totalGanhos}</b> de <b>${campeoes.length}</b> (${pct}%)`;
+  document.getElementById('progresso').style.width = pct + '%';
+}
+
+document.getElementById('grade').addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (card) { alternarMarca(card.dataset.id); renderizar(); }
+});
+
+document.getElementById('pesquisa').addEventListener('input', e => {
+  busca = e.target.value;
+  renderizar();
+});
+
+document.querySelectorAll('.filtros button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.filtros button').forEach(x => x.classList.remove('ativo'));
+    b.classList.add('ativo');
+    filtro = b.dataset.filtro;
+    renderizar();
+  });
+});
+
+document.getElementById('marcar-todos-ganhou').addEventListener('click', () => {
+  if (!confirm('Marcar TODOS os campeões como ganho?')) return;
+  campeoes.forEach(c => marcas[c.id] = 'ganhou');
+  salvar();
+  renderizar();
+});
+
+document.getElementById('limpar').addEventListener('click', () => {
+  if (!confirm('Limpar todas as marcas?')) return;
+  marcas = {};
+  salvar();
+  renderizar();
+});
+
+carregar();
+</script>
+</body>
+</html>
