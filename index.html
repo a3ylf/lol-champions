@@ -133,6 +133,7 @@
   </div>
   <div class="acoes">
     <button id="marcar-todos-ganhou">Marcar todos como ganho</button>
+    <button id="gerar-link">Copiar link com progresso</button>
     <button id="limpar">Limpar tudo</button>
   </div>
 </div>
@@ -237,6 +238,27 @@ document.getElementById('limpar').addEventListener('click', () => {
   renderizar();
 });
 
+document.getElementById('gerar-link').addEventListener('click', () => {
+  const ganhos = campeoes.filter(c => marcas[c.id] === 'ganhou').map(c => c.id).join('.');
+  const url = location.origin + location.pathname + '#p=' + ganhos;
+  navigator.clipboard.writeText(url)
+    .then(() => alert(`Link copiado! Ele tem ${ganhos ? ganhos.split('.').length : 0} vitórias. Abra em outro dispositivo para carregar.`))
+    .catch(() => prompt('Copie o link abaixo:', url));
+});
+
+function importarDoLink() {
+  if (!location.hash.startsWith('#p=')) return false;
+  const ids = decodeURIComponent(location.hash.slice(3)).split('.').filter(Boolean);
+  marcas = {};
+  ids.forEach(id => { if (id) marcas[id] = 'ganhou'; });
+  salvar();
+  history.replaceState(null, '', location.pathname);
+  return true;
+}
+
+if (importarDoLink()) {
+  alert('Progresso importado do link!');
+}
 carregar();
 </script>
 </body>
