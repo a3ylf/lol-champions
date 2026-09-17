@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arena — Composição das vitórias</title>
+  <link rel="stylesheet" href="statistics.css">
+</head>
+<body>
+<main>
+  <nav><a href="index.html">← Campeões e datas</a><span>ARENA · 1º LUGAR</span></nav>
+  <header><p class="eyebrow">O histórico do grupo</p><h1>Como a gente vence</h1><p id="periodo">Carregando partidas…</p></header>
+  <p class="nota">Este painel usa as partidas completas do histórico do grupo. Marcar um campeão na grade não cria uma partida aqui: faltariam os outros jogadores e a composição. Os percentuais mostram a participação nas vitórias registradas; sem derrotas, não há taxa de vitória.</p>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section class="filtros" aria-label="Filtros e exportações">
+    <label>De <input id="inicio" type="date"></label>
+    <label>Até <input id="fim" type="date"></label>
+    <label>Composições <select id="ordem"><option value="players">Na ordem dos jogadores</option><option value="team">Sem ordem dos jogadores</option></select></label>
+    <button id="limpar-filtros">Todo o período</button>
+    <button id="exportar-partidas">Exportar partidas CSV</button>
+    <button id="exportar-resumo">Exportar resumo CSV</button>
+    <button id="imprimir">Imprimir / PDF</button>
+  </section>
+  <section class="indicadores" aria-label="Resumo">
+    <article><h2>Vitórias registradas</h2><strong id="total">—</strong><p id="unicos"></p></article>
+    <article><h2>Tralhoto como tanque</h2><strong id="tanque">—</strong><p id="tanque-contagem"></p></article>
+    <article><h2>Classe mais comum no trio</h2><strong class="composicao" id="classe-top">—</strong><p id="classe-top-porcentagem"></p></article>
+    <article><h2>Perfil AD/AP mais comum</h2><strong class="composicao" id="dano-top">—</strong><p id="dano-top-porcentagem"></p></article>
+  </section>
+  <div class="paineis">
+    <section class="painel"><h2>Classes por jogador</h2><p>Percentual e quantidade de vitórias por classe.</p><div class="tabela" id="tabela-classes"></div></section>
+    <section class="painel"><h2>Participação das classes</h2><div id="grafico-classes"></div></section>
+    <section class="painel"><h2>Perfis AD/AP por jogador</h2><p>Classificação convencional, revisável abaixo.</p><div class="tabela" id="tabela-dano"></div></section>
+    <section class="painel"><h2>Perfil AD/AP nas vitórias</h2><div id="grafico-dano"></div></section>
+    <section class="painel"><h2>Composições mais frequentes</h2><p id="ordem-nota"></p><div class="tabela" id="tabela-composicoes"></div></section>
+    <section class="painel"><h2>As cinco composições mais frequentes</h2><div id="grafico-composicoes"></div></section>
+  </div>
+  <section class="painel"><h2>Partidas que entram na conta</h2><p>Uma linha por 1º lugar. Campeões repetidos contam em cada partida.</p><div class="tabela" id="tabela-partidas"></div></section>
+  <details class="painel"><summary>Revisar classificações dos campeões</summary>
+    <p id="metodo-classes"></p><p id="metodo-dano"></p>
+    <p>As alterações abaixo recalculam o painel e são salvas neste navegador. Elas não alteram as vitórias nem os dados originais do grupo.</p>
+    <button id="restaurar-perfis">Restaurar classificações iniciais</button>
+    <div class="tabela" id="tabela-perfis"></div>
+  </details>
+  <footer>Somente partidas fornecidas pelo grupo. <a href="data/arena-win-matches.csv" download>Dados de origem</a> · <a id="fonte-classes" target="_blank" rel="noopener noreferrer">Classes: Riot Data Dragon</a></footer>
+</main>
+<script src="statistics-model.js"></script>
+<script src="statistics.js"></script>
+</body>
+</html>

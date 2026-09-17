@@ -1,0 +1,486 @@
+{
+  "version": "16.18.1",
+  "source": "https://ddragon.leagueoflegends.com/cdn/16.18.1/data/pt_BR/champion.json",
+  "damageNote": "Convenção inicial revisável por campeão; não representa a build nem o dano observado em cada partida. Híbrido agrupa campeões de perfil misto ou flexível entre AD e AP.",
+  "champions": {
+    "Alistar": {
+      "name": "Alistar",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Ambessa": {
+      "name": "Ambessa",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Amumu": {
+      "name": "Amumu",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Ashe": {
+      "name": "Ashe",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Support"
+      ],
+      "damage": "AD"
+    },
+    "AurelionSol": {
+      "name": "Aurelion Sol",
+      "class": "Mage",
+      "tags": [
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Belveth": {
+      "name": "Bel'Veth",
+      "class": "Fighter",
+      "tags": [
+        "Fighter"
+      ],
+      "damage": "AD"
+    },
+    "Blitzcrank": {
+      "name": "Blitzcrank",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Brand": {
+      "name": "Brand",
+      "class": "Mage",
+      "tags": [
+        "Mage",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Braum": {
+      "name": "Braum",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "Híbrido"
+    },
+    "Chogath": {
+      "name": "Cho'Gath",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Corki": {
+      "name": "Corki",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Mage"
+      ],
+      "damage": "AD"
+    },
+    "Fizz": {
+      "name": "Fizz",
+      "class": "Assassin",
+      "tags": [
+        "Assassin",
+        "Fighter"
+      ],
+      "damage": "AP"
+    },
+    "Galio": {
+      "name": "Galio",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Gragas": {
+      "name": "Gragas",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Graves": {
+      "name": "Graves",
+      "class": "Marksman",
+      "tags": [
+        "Marksman"
+      ],
+      "damage": "AD"
+    },
+    "Gwen": {
+      "name": "Gwen",
+      "class": "Fighter",
+      "tags": [
+        "Fighter"
+      ],
+      "damage": "AP"
+    },
+    "Illaoi": {
+      "name": "Illaoi",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Tank"
+      ],
+      "damage": "AD"
+    },
+    "Ivern": {
+      "name": "Ivern",
+      "class": "Support",
+      "tags": [
+        "Support",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Jhin": {
+      "name": "Jhin",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Mage"
+      ],
+      "damage": "AD"
+    },
+    "Karthus": {
+      "name": "Karthus",
+      "class": "Mage",
+      "tags": [
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Katarina": {
+      "name": "Katarina",
+      "class": "Assassin",
+      "tags": [
+        "Assassin",
+        "Mage"
+      ],
+      "damage": "Híbrido"
+    },
+    "Kayn": {
+      "name": "Kayn",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Kennen": {
+      "name": "Kennen",
+      "class": "Mage",
+      "tags": [
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Kindred": {
+      "name": "Kindred",
+      "class": "Marksman",
+      "tags": [
+        "Marksman"
+      ],
+      "damage": "AD"
+    },
+    "LeeSin": {
+      "name": "Lee Sin",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Locke": {
+      "name": "Locke",
+      "class": "Assassin",
+      "tags": [
+        "Assassin",
+        "Mage"
+      ],
+      "damage": "Não definido"
+    },
+    "Lux": {
+      "name": "Lux",
+      "class": "Mage",
+      "tags": [
+        "Mage",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Maokai": {
+      "name": "Maokai",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Nasus": {
+      "name": "Nasus",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Tank"
+      ],
+      "damage": "AD"
+    },
+    "Orianna": {
+      "name": "Orianna",
+      "class": "Mage",
+      "tags": [
+        "Mage",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Ornn": {
+      "name": "Ornn",
+      "class": "Tank",
+      "tags": [
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Rakan": {
+      "name": "Rakan",
+      "class": "Support",
+      "tags": [
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Rumble": {
+      "name": "Rumble",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Ryze": {
+      "name": "Ryze",
+      "class": "Mage",
+      "tags": [
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Senna": {
+      "name": "Senna",
+      "class": "Support",
+      "tags": [
+        "Support",
+        "Marksman"
+      ],
+      "damage": "AD"
+    },
+    "Shaco": {
+      "name": "Shaco",
+      "class": "Assassin",
+      "tags": [
+        "Assassin"
+      ],
+      "damage": "Híbrido"
+    },
+    "Shen": {
+      "name": "Shen",
+      "class": "Tank",
+      "tags": [
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Shyvana": {
+      "name": "Shyvana",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Singed": {
+      "name": "Singed",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Sion": {
+      "name": "Sion",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Fighter"
+      ],
+      "damage": "AD"
+    },
+    "Sona": {
+      "name": "Sona",
+      "class": "Support",
+      "tags": [
+        "Support",
+        "Mage"
+      ],
+      "damage": "AP"
+    },
+    "Sylas": {
+      "name": "Sylas",
+      "class": "Mage",
+      "tags": [
+        "Mage",
+        "Assassin"
+      ],
+      "damage": "AP"
+    },
+    "TahmKench": {
+      "name": "Tahm Kench",
+      "class": "Tank",
+      "tags": [
+        "Tank",
+        "Support"
+      ],
+      "damage": "AP"
+    },
+    "Talon": {
+      "name": "Talon",
+      "class": "Assassin",
+      "tags": [
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Taric": {
+      "name": "Taric",
+      "class": "Support",
+      "tags": [
+        "Support",
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Thresh": {
+      "name": "Thresh",
+      "class": "Support",
+      "tags": [
+        "Support",
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Tristana": {
+      "name": "Tristana",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Twitch": {
+      "name": "Twitch",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Udyr": {
+      "name": "Udyr",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Tank"
+      ],
+      "damage": "Híbrido"
+    },
+    "Vayne": {
+      "name": "Vayne",
+      "class": "Marksman",
+      "tags": [
+        "Marksman",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Viego": {
+      "name": "Viego",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Assassin"
+      ],
+      "damage": "AD"
+    },
+    "Yorick": {
+      "name": "Yorick",
+      "class": "Fighter",
+      "tags": [
+        "Fighter",
+        "Tank"
+      ],
+      "damage": "AD"
+    },
+    "Zaahen": {
+      "name": "Zaahen",
+      "class": "Fighter",
+      "tags": [
+        "Fighter"
+      ],
+      "damage": "AD"
+    },
+    "Zeri": {
+      "name": "Zeri",
+      "class": "Marksman",
+      "tags": [
+        "Marksman"
+      ],
+      "damage": "AD"
+    },
+    "Ziggs": {
+      "name": "Ziggs",
+      "class": "Mage",
+      "tags": [
+        "Mage"
+      ],
+      "damage": "AP"
+    }
+  }
+}

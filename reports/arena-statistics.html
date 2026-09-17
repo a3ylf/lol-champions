@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arena — Composição das vitórias</title>
+  <style>
+* { box-sizing: border-box; }
+:root { color-scheme: dark; font-family: 'Segoe UI', system-ui, sans-serif; color: #f0e6d2; background: #0a1428; }
+body { margin: 0; }
+main { max-width: 1500px; margin: auto; padding: 28px; }
+nav { display: flex; justify-content: space-between; gap: 16px; font-size: .8rem; letter-spacing: .06em; }
+a { color: #55d4c4; }
+header { margin: 40px 0 24px; border-bottom: 2px solid #c8aa6e; padding-bottom: 22px; }
+.eyebrow { color: #c8aa6e; text-transform: uppercase; letter-spacing: .15em; font-size: .75rem; }
+h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 650; margin: 8px 0; }
+h2 { font-size: 1rem; margin: 0 0 10px; }
+p { color: #b1b8c5; line-height: 1.5; }
+.nota { background: #152238; border-left: 3px solid #c8aa6e; padding: 14px 18px; font-size: .88rem; }
+#status { color: #e7c178; }
+#status:empty { display: none; }
+.filtros { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; margin: 24px 0; }
+label { display: grid; gap: 6px; font-size: .8rem; color: #c5c9d1; }
+button, select, input { border: 1px solid #536076; border-radius: 5px; padding: 10px; background: #132037; color: #f0e6d2; font: inherit; }
+button { cursor: pointer; font-size: .82rem; }
+button:hover { border-color: #c8aa6e; }
+button:focus-visible, select:focus-visible, input:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid #55d4c4; outline-offset: 3px; }
+.indicadores { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; }
+.indicadores article { background: #16233a; border: 1px solid #334058; border-top: 3px solid #c8aa6e; border-radius: 6px; padding: 20px; }
+.indicadores h2 { font-size: .8rem; font-weight: 500; color: #b1b8c5; }
+.indicadores strong { color: #e9c886; font-size: 2.4rem; font-weight: 600; }
+.indicadores .composicao { font-size: 1.15rem; line-height: 1.5; }
+.indicadores p { margin-bottom: 0; font-size: .8rem; }
+.paineis { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.painel { min-width: 0; padding: 22px; border: 1px solid #334058; border-radius: 7px; background: #101d32; margin-bottom: 20px; }
+.paineis .painel { margin-bottom: 0; }
+.paineis { margin-bottom: 20px; }
+.painel > p { font-size: .8rem; }
+.tabela { overflow-x: auto; margin-top: 18px; }
+table { border-collapse: collapse; width: 100%; font-size: .78rem; }
+th, td { text-align: left; padding: 11px 8px; border-bottom: 1px solid #2d3950; white-space: nowrap; }
+th { color: #c8aa6e; font-weight: 600; }
+td small { display: block; color: #a2acbb; padding-top: 3px; }
+tbody tr:hover { background: #1a2a42; }
+.grafico { display: block; width: 100%; min-height: 180px; }
+.grafico text { font-family: 'Segoe UI', system-ui, sans-serif; fill: #c7cfdd; font-size: 11px; }
+.legenda { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; font-size: .72rem; color: #c7cfdd; margin-top: 12px; }
+.legenda span { display: flex; gap: 5px; align-items: center; }
+.legenda i { width: 10px; height: 10px; border-radius: 2px; }
+.barra-linha { margin: 18px 0; font-size: .82rem; }
+.barra-linha > div:first-child { display: flex; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+.trilho { height: 12px; border-radius: 3px; background: #22324a; overflow: hidden; }
+.trilho div { background: #c8aa6e; height: 100%; }
+summary { cursor: pointer; color: #e9c886; font-weight: 600; }
+footer { font-size: .8rem; color: #a2acbb; line-height: 1.8; margin-top: 24px; }
+@media (max-width: 1050px) { .indicadores { grid-template-columns: repeat(2, minmax(0, 1fr)); } .paineis { grid-template-columns: 1fr; } }
+@media (max-width: 550px) { main { padding: 16px; } nav span { display: none; } .indicadores { grid-template-columns: 1fr; } .painel { padding: 16px; } }
+@media print { :root { color-scheme: light; color: #142238; background: white; } main { max-width: none; padding: 0; } nav, .filtros, details, footer { display: none; } header { margin-top: 0; } .nota, .painel, .indicadores article { background: white; border-color: #bbb; break-inside: avoid; } p, th, td, .indicadores h2 { color: #333; } .indicadores strong { color: #725419; } .grafico text { fill: #333; } .legenda { color: #333; } .indicadores { grid-template-columns: repeat(4, 1fr); } .paineis { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <nav><a href="https://a3ylf.github.io/lol-champions/">← Campeões e datas</a><span>ARENA · 1º LUGAR</span></nav>
+  <header><p class="eyebrow">O histórico do grupo</p><h1>Como a gente vence</h1><p id="periodo">Carregando partidas…</p></header>
+  <p class="nota">Este painel usa as partidas completas do histórico do grupo. Marcar um campeão na grade não cria uma partida aqui: faltariam os outros jogadores e a composição. Os percentuais mostram a participação nas vitórias registradas; sem derrotas, não há taxa de vitória.</p>
+  <p id="status" role="status" aria-live="polite"></p>
+  <section class="filtros" aria-label="Filtros e exportações">
+    <label>De <input id="inicio" type="date"></label>
+    <label>Até <input id="fim" type="date"></label>
+    <label>Composições <select id="ordem"><option value="players">Na ordem dos jogadores</option><option value="team">Sem ordem dos jogadores</option></select></label>
+    <button id="limpar-filtros">Todo o período</button>
+    <button id="exportar-partidas">Exportar partidas CSV</button>
+    <button id="exportar-resumo">Exportar resumo CSV</button>
+    <button id="imprimir">Imprimir / PDF</button>
+  </section>
+  <section class="indicadores" aria-label="Resumo">
+    <article><h2>Vitórias registradas</h2><strong id="total">—</strong><p id="unicos"></p></article>
+    <article><h2>Tralhoto como tanque</h2><strong id="tanque">—</strong><p id="tanque-contagem"></p></article>
+    <article><h2>Classe mais comum no trio</h2><strong class="composicao" id="classe-top">—</strong><p id="classe-top-porcentagem"></p></article>
+    <article><h2>Perfil AD/AP mais comum</h2><strong class="composicao" id="dano-top">—</strong><p id="dano-top-porcentagem"></p></article>
+  </section>
+  <div class="paineis">
+    <section class="painel"><h2>Classes por jogador</h2><p>Percentual e quantidade de vitórias por classe.</p><div class="tabela" id="tabela-classes"></div></section>
+    <section class="painel"><h2>Participação das classes</h2><div id="grafico-classes"></div></section>
+    <section class="painel"><h2>Perfis AD/AP por jogador</h2><p>Classificação convencional, revisável abaixo.</p><div class="tabela" id="tabela-dano"></div></section>
+    <section class="painel"><h2>Perfil AD/AP nas vitórias</h2><div id="grafico-dano"></div></section>
+    <section class="painel"><h2>Composições mais frequentes</h2><p id="ordem-nota"></p><div class="tabela" id="tabela-composicoes"></div></section>
+    <section class="painel"><h2>As cinco composições mais frequentes</h2><div id="grafico-composicoes"></div></section>
+  </div>
+  <section class="painel"><h2>Partidas que entram na conta</h2><p>Uma linha por 1º lugar. Campeões repetidos contam em cada partida.</p><div class="tabela" id="tabela-partidas"></div></section>
+  <details class="painel"><summary>Revisar classificações dos campeões</summary>
+    <p id="metodo-classes"></p><p id="metodo-dano"></p>
+    <p>As alterações abaixo recalculam o painel e são salvas neste navegador. Elas não alteram as vitórias nem os dados originais do grupo.</p>
+    <button id="restaurar-perfis">Restaurar classificações iniciais</button>
+    <div class="tabela" id="tabela-perfis"></div>
+  </details>
+  <footer>Somente partidas fornecidas pelo grupo. <a href="data:text/csv;charset=utf-8,match_date%2CCartografia%23br1%2CTralhoto%23Fish%2Ceyeless%23aespa%2Cmatch_url%0A2026-09-12%2CRumble%2CKatarina%2CNasus%2Chttps%3A//www.leagueofgraphs.com/match/br/3282295642%0A2026-09-11%2CVayne%2CSylas%2CGalio%2Chttps%3A//www.leagueofgraphs.com/match/br/3282132259%0A2026-09-11%2CAshe%2CGragas%2CGraves%2Chttps%3A//www.leagueofgraphs.com/match/br/3282089091%0A2026-09-01%2CBelveth%2CViego%2CMaokai%2Chttps%3A//www.leagueofgraphs.com/match/br/3278398647%0A2026-08-28%2CTaric%2CZeri%2CBlitzcrank%2Chttps%3A//www.leagueofgraphs.com/match/br/3277037822%0A2026-08-25%2CTwitch%2CThresh%2CUdyr%2Chttps%3A//www.leagueofgraphs.com/match/br/3276165629%0A2026-08-25%2CLocke%2CIllaoi%2CIvern%2Chttps%3A//www.leagueofgraphs.com/match/br/3276128300%0A2026-08-25%2CSenna%2CLux%2CRakan%2Chttps%3A//www.leagueofgraphs.com/match/br/3276079547%0A2026-08-24%2CTristana%2CKennen%2CSinged%2Chttps%3A//www.leagueofgraphs.com/match/br/3275811136%0A2026-08-21%2CShaco%2CAmbessa%2CShen%2Chttps%3A//www.leagueofgraphs.com/match/br/3274799698%0A2026-08-21%2CZiggs%2CJhin%2CAlistar%2Chttps%3A//www.leagueofgraphs.com/match/br/3274783477%0A2026-08-21%2CYorick%2CBrand%2CGwen%2Chttps%3A//www.leagueofgraphs.com/match/br/3274730462%0A2026-08-19%2CRyze%2CAmumu%2COrianna%2C%0A2026-08-13%2CLeeSin%2CKarthus%2CShyvana%2Chttps%3A//www.leagueofgraphs.com/match/br/3272153336%0A2026-08-13%2CSona%2CFizz%2CTalon%2Chttps%3A//www.leagueofgraphs.com/match/br/3272133374%0A2026-08-13%2CKindred%2CAurelionSol%2CTahmKench%2Chttps%3A//www.leagueofgraphs.com/match/br/3272125283%0A2026-08-08%2CBrand%2CCorki%2COrnn%2Chttps%3A//www.leagueofgraphs.com/match/br/3270489324%0A2026-08-08%2CFizz%2CChogath%2CSion%2Chttps%3A//www.leagueofgraphs.com/match/br/3270469181%0A2026-08-08%2CBraum%2CZaahen%2CKayn%2Chttps%3A//www.leagueofgraphs.com/match/br/3270382867%0A" download="arena-win-matches.csv">Dados de origem</a> · <a id="fonte-classes" target="_blank" rel="noopener noreferrer">Classes: Riot Data Dragon</a></footer>
+</main>
+<script>
+(function (root) {
+  'use strict';
+  const classes = ['Tank', 'Fighter', 'Assassin', 'Mage', 'Marksman', 'Support'];
+  const classNames = { Tank: 'Tanque', Fighter: 'Lutador', Assassin: 'Assassino', Mage: 'Mago', Marksman: 'Atirador', Support: 'Suporte', Unknown: 'Não definido' };
+  const damageTypes = ['AD', 'AP', 'Híbrido', 'Não definido'];
+
+  function summarize(data, profiles, { start = '', end = '', ordered = true } = {}) {
+    const matches = data.matches.filter(m => (!start || m.date >= start) && (!end || m.date <= end));
+    const players = data.players.map(player => ({ player, classes: {}, damage: {} }));
+    const compositions = { classes: new Map(), damage: new Map() };
+    const unique = new Set();
+    for (const match of matches) {
+      const values = { classes: [], damage: [] };
+      match.champions.forEach((id, i) => {
+        unique.add(id);
+        const profile = profiles[id] || {};
+        const role = classes.includes(profile.class) ? profile.class : 'Unknown';
+        const damage = damageTypes.includes(profile.damage) ? profile.damage : 'Não definido';
+        players[i].classes[role] = (players[i].classes[role] || 0) + 1;
+        players[i].damage[damage] = (players[i].damage[damage] || 0) + 1;
+        values.classes.push(classNames[role]);
+        values.damage.push(damage);
+      });
+      for (const kind of ['classes', 'damage']) {
+        const key = (ordered ? values[kind] : values[kind].sort((a, b) => a.localeCompare(b, 'pt-BR'))).join(' | ');
+        compositions[kind].set(key, (compositions[kind].get(key) || 0) + 1);
+      }
+    }
+    const sorted = map => [...map].map(([label, count]) => ({ label, count }))
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, 'pt-BR'));
+    return { matches, total: matches.length, unique: unique.size, players,
+      classes: sorted(compositions.classes), damage: sorted(compositions.damage) };
+  }
+
+  function csv(rows) {
+    return '\uFEFF' + rows.map(row => row.map(value => {
+      let text = String(value ?? '');
+      if (/^[=+@-]/.test(text)) text = "'" + text;
+      return '"' + text.replaceAll('"', '""') + '"';
+    }).join(',')).join('\r\n') + '\r\n';
+  }
+  const api = { classes, classNames, damageTypes, summarize, csv };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.ArenaStatistics = api;
+})(globalThis);
+</script>
+<script>
+window.ArenaSnapshot = [{"players": ["Cartografia#br1", "Tralhoto#Fish", "eyeless#aespa"], "matches": [{"date": "2026-09-12", "champions": ["Rumble", "Katarina", "Nasus"], "url": "https://www.leagueofgraphs.com/match/br/3282295642"}, {"date": "2026-09-11", "champions": ["Vayne", "Sylas", "Galio"], "url": "https://www.leagueofgraphs.com/match/br/3282132259"}, {"date": "2026-09-11", "champions": ["Ashe", "Gragas", "Graves"], "url": "https://www.leagueofgraphs.com/match/br/3282089091"}, {"date": "2026-09-01", "champions": ["Belveth", "Viego", "Maokai"], "url": "https://www.leagueofgraphs.com/match/br/3278398647"}, {"date": "2026-08-28", "champions": ["Taric", "Zeri", "Blitzcrank"], "url": "https://www.leagueofgraphs.com/match/br/3277037822"}, {"date": "2026-08-25", "champions": ["Twitch", "Thresh", "Udyr"], "url": "https://www.leagueofgraphs.com/match/br/3276165629"}, {"date": "2026-08-25", "champions": ["Locke", "Illaoi", "Ivern"], "url": "https://www.leagueofgraphs.com/match/br/3276128300"}, {"date": "2026-08-25", "champions": ["Senna", "Lux", "Rakan"], "url": "https://www.leagueofgraphs.com/match/br/3276079547"}, {"date": "2026-08-24", "champions": ["Tristana", "Kennen", "Singed"], "url": "https://www.leagueofgraphs.com/match/br/3275811136"}, {"date": "2026-08-21", "champions": ["Shaco", "Ambessa", "Shen"], "url": "https://www.leagueofgraphs.com/match/br/3274799698"}, {"date": "2026-08-21", "champions": ["Ziggs", "Jhin", "Alistar"], "url": "https://www.leagueofgraphs.com/match/br/3274783477"}, {"date": "2026-08-21", "champions": ["Yorick", "Brand", "Gwen"], "url": "https://www.leagueofgraphs.com/match/br/3274730462"}, {"date": "2026-08-19", "champions": ["Ryze", "Amumu", "Orianna"], "url": null}, {"date": "2026-08-13", "champions": ["LeeSin", "Karthus", "Shyvana"], "url": "https://www.leagueofgraphs.com/match/br/3272153336"}, {"date": "2026-08-13", "champions": ["Sona", "Fizz", "Talon"], "url": "https://www.leagueofgraphs.com/match/br/3272133374"}, {"date": "2026-08-13", "champions": ["Kindred", "AurelionSol", "TahmKench"], "url": "https://www.leagueofgraphs.com/match/br/3272125283"}, {"date": "2026-08-08", "champions": ["Brand", "Corki", "Ornn"], "url": "https://www.leagueofgraphs.com/match/br/3270489324"}, {"date": "2026-08-08", "champions": ["Fizz", "Chogath", "Sion"], "url": "https://www.leagueofgraphs.com/match/br/3270469181"}, {"date": "2026-08-08", "champions": ["Braum", "Zaahen", "Kayn"], "url": "https://www.leagueofgraphs.com/match/br/3270382867"}]}, {"version": "16.18.1", "source": "https://ddragon.leagueoflegends.com/cdn/16.18.1/data/pt_BR/champion.json", "damageNote": "Convenção inicial revisável por campeão; não representa a build nem o dano observado em cada partida. Híbrido agrupa campeões de perfil misto ou flexível entre AD e AP.", "champions": {"Alistar": {"name": "Alistar", "class": "Tank", "tags": ["Tank", "Support"], "damage": "AP"}, "Ambessa": {"name": "Ambessa", "class": "Fighter", "tags": ["Fighter", "Assassin"], "damage": "AD"}, "Amumu": {"name": "Amumu", "class": "Tank", "tags": ["Tank", "Support"], "damage": "AP"}, "Ashe": {"name": "Ashe", "class": "Marksman", "tags": ["Marksman", "Support"], "damage": "AD"}, "AurelionSol": {"name": "Aurelion Sol", "class": "Mage", "tags": ["Mage"], "damage": "AP"}, "Belveth": {"name": "Bel'Veth", "class": "Fighter", "tags": ["Fighter"], "damage": "AD"}, "Blitzcrank": {"name": "Blitzcrank", "class": "Tank", "tags": ["Tank", "Support"], "damage": "AP"}, "Brand": {"name": "Brand", "class": "Mage", "tags": ["Mage", "Support"], "damage": "AP"}, "Braum": {"name": "Braum", "class": "Tank", "tags": ["Tank", "Support"], "damage": "Híbrido"}, "Chogath": {"name": "Cho'Gath", "class": "Tank", "tags": ["Tank", "Mage"], "damage": "AP"}, "Corki": {"name": "Corki", "class": "Marksman", "tags": ["Marksman", "Mage"], "damage": "AD"}, "Fizz": {"name": "Fizz", "class": "Assassin", "tags": ["Assassin", "Fighter"], "damage": "AP"}, "Galio": {"name": "Galio", "class": "Tank", "tags": ["Tank", "Mage"], "damage": "AP"}, "Gragas": {"name": "Gragas", "class": "Fighter", "tags": ["Fighter", "Mage"], "damage": "AP"}, "Graves": {"name": "Graves", "class": "Marksman", "tags": ["Marksman"], "damage": "AD"}, "Gwen": {"name": "Gwen", "class": "Fighter", "tags": ["Fighter"], "damage": "AP"}, "Illaoi": {"name": "Illaoi", "class": "Fighter", "tags": ["Fighter", "Tank"], "damage": "AD"}, "Ivern": {"name": "Ivern", "class": "Support", "tags": ["Support", "Mage"], "damage": "AP"}, "Jhin": {"name": "Jhin", "class": "Marksman", "tags": ["Marksman", "Mage"], "damage": "AD"}, "Karthus": {"name": "Karthus", "class": "Mage", "tags": ["Mage"], "damage": "AP"}, "Katarina": {"name": "Katarina", "class": "Assassin", "tags": ["Assassin", "Mage"], "damage": "Híbrido"}, "Kayn": {"name": "Kayn", "class": "Fighter", "tags": ["Fighter", "Assassin"], "damage": "AD"}, "Kennen": {"name": "Kennen", "class": "Mage", "tags": ["Mage"], "damage": "AP"}, "Kindred": {"name": "Kindred", "class": "Marksman", "tags": ["Marksman"], "damage": "AD"}, "LeeSin": {"name": "Lee Sin", "class": "Fighter", "tags": ["Fighter", "Assassin"], "damage": "AD"}, "Locke": {"name": "Locke", "class": "Assassin", "tags": ["Assassin", "Mage"], "damage": "Não definido"}, "Lux": {"name": "Lux", "class": "Mage", "tags": ["Mage", "Support"], "damage": "AP"}, "Maokai": {"name": "Maokai", "class": "Tank", "tags": ["Tank", "Support"], "damage": "AP"}, "Nasus": {"name": "Nasus", "class": "Fighter", "tags": ["Fighter", "Tank"], "damage": "AD"}, "Orianna": {"name": "Orianna", "class": "Mage", "tags": ["Mage", "Support"], "damage": "AP"}, "Ornn": {"name": "Ornn", "class": "Tank", "tags": ["Tank"], "damage": "Híbrido"}, "Rakan": {"name": "Rakan", "class": "Support", "tags": ["Support"], "damage": "AP"}, "Rumble": {"name": "Rumble", "class": "Fighter", "tags": ["Fighter", "Mage"], "damage": "AP"}, "Ryze": {"name": "Ryze", "class": "Mage", "tags": ["Mage"], "damage": "AP"}, "Senna": {"name": "Senna", "class": "Support", "tags": ["Support", "Marksman"], "damage": "AD"}, "Shaco": {"name": "Shaco", "class": "Assassin", "tags": ["Assassin"], "damage": "Híbrido"}, "Shen": {"name": "Shen", "class": "Tank", "tags": ["Tank"], "damage": "Híbrido"}, "Shyvana": {"name": "Shyvana", "class": "Fighter", "tags": ["Fighter", "Tank"], "damage": "Híbrido"}, "Singed": {"name": "Singed", "class": "Tank", "tags": ["Tank", "Mage"], "damage": "AP"}, "Sion": {"name": "Sion", "class": "Tank", "tags": ["Tank", "Fighter"], "damage": "AD"}, "Sona": {"name": "Sona", "class": "Support", "tags": ["Support", "Mage"], "damage": "AP"}, "Sylas": {"name": "Sylas", "class": "Mage", "tags": ["Mage", "Assassin"], "damage": "AP"}, "TahmKench": {"name": "Tahm Kench", "class": "Tank", "tags": ["Tank", "Support"], "damage": "AP"}, "Talon": {"name": "Talon", "class": "Assassin", "tags": ["Assassin"], "damage": "AD"}, "Taric": {"name": "Taric", "class": "Support", "tags": ["Support", "Tank"], "damage": "Híbrido"}, "Thresh": {"name": "Thresh", "class": "Support", "tags": ["Support", "Tank"], "damage": "Híbrido"}, "Tristana": {"name": "Tristana", "class": "Marksman", "tags": ["Marksman", "Assassin"], "damage": "AD"}, "Twitch": {"name": "Twitch", "class": "Marksman", "tags": ["Marksman", "Assassin"], "damage": "AD"}, "Udyr": {"name": "Udyr", "class": "Fighter", "tags": ["Fighter", "Tank"], "damage": "Híbrido"}, "Vayne": {"name": "Vayne", "class": "Marksman", "tags": ["Marksman", "Assassin"], "damage": "AD"}, "Viego": {"name": "Viego", "class": "Fighter", "tags": ["Fighter", "Assassin"], "damage": "AD"}, "Yorick": {"name": "Yorick", "class": "Fighter", "tags": ["Fighter", "Tank"], "damage": "AD"}, "Zaahen": {"name": "Zaahen", "class": "Fighter", "tags": ["Fighter"], "damage": "AD"}, "Zeri": {"name": "Zeri", "class": "Marksman", "tags": ["Marksman"], "damage": "AD"}, "Ziggs": {"name": "Ziggs", "class": "Mage", "tags": ["Mage"], "damage": "AP"}}}];
+'use strict';
+const S = ArenaStatistics;
+const $ = id => document.getElementById(id);
+const PROFILE_KEY = 'lolArenaProfiles';
+const palette = ['#94a3b8', '#d58b5d', '#b184dd', '#589dc8', '#4bb58d', '#d6b65b', '#bdc4cf'];
+const damagePalette = ['#df6c68', '#619bea', '#b18aff', '#94a3b8'];
+let dataset, defaults, profiles, report;
+let overrides = {};
+const pct = (n, total) => (total ? n / total * 100 : 0).toLocaleString('pt-BR', { maximumFractionDigits: 1, minimumFractionDigits: 1 }) + '%';
+const formatDate = date => date.split('-').reverse().join('/');
+function el(tag, text) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; return node; }
+
+function table(target, headers, rows) {
+  const node = el('table');
+  const head = el('thead');
+  const heading = el('tr');
+  headers.forEach(value => { const cell = el('th', value); cell.scope = 'col'; heading.append(cell); });
+  head.append(heading);
+  const body = el('tbody');
+  rows.forEach(row => {
+    const tr = el('tr');
+    row.forEach(value => { const cell = el('td'); cell.append(value instanceof Node ? value : document.createTextNode(String(value))); tr.append(cell); });
+    body.append(tr);
+  });
+  node.append(head, body);
+  $(target).replaceChildren(node);
+}
+
+function statCell(count) {
+  const cell = el('div', pct(count, report.total));
+  cell.append(el('small', `${count} de ${report.total}`));
+  return cell;
+}
+
+function groupedChart(target, categories, kind, colors, label) {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 660 290');
+  svg.setAttribute('class', 'grafico');
+  svg.setAttribute('role', 'img');
+  svg.setAttribute('aria-label', label + '. Os valores exatos estão na tabela correspondente.');
+  function shape(tag, attrs, text) {
+    const node = document.createElementNS(NS, tag);
+    Object.entries(attrs).forEach(([key, value]) => node.setAttribute(key, value));
+    if (text !== undefined) node.textContent = text;
+    svg.append(node);
+    return node;
+  }
+  for (let n = 0; n <= 100; n += 25) {
+    const y = 240 - n * 2;
+    shape('line', { x1: 44, x2: 650, y1: y, y2: y, stroke: '#43516a', 'stroke-dasharray': '3 4' });
+    shape('text', { x: 35, y: y + 4, 'text-anchor': 'end' }, n + '%');
+  }
+  report.players.forEach((player, i) => {
+    const x = 62 + i * 200;
+    const width = Math.min(25, 165 / categories.length);
+    categories.forEach((category, j) => {
+      const count = player[kind][category] || 0;
+      const height = report.total ? count / report.total * 200 : 0;
+      const bar = shape('rect', { x: x + j * width, y: 240 - height, width: width - 3, height, fill: colors[j] });
+      const title = document.createElementNS(NS, 'title');
+      title.textContent = `${player.player} · ${kind === 'classes' ? S.classNames[category] : category}: ${count} de ${report.total} (${pct(count, report.total)})`;
+      bar.append(title);
+    });
+    shape('text', { x: x + 75, y: 265, 'text-anchor': 'middle' }, player.player.split('#')[0]);
+  });
+  const legend = el('div');
+  legend.className = 'legenda';
+  categories.forEach((category, i) => {
+    const item = el('span');
+    const swatch = el('i');
+    swatch.style.background = colors[i];
+    item.append(swatch, document.createTextNode(kind === 'classes' ? S.classNames[category] : category));
+    legend.append(item);
+  });
+  $(target).replaceChildren(svg, legend);
+}
+
+function topComposition(kind, labelId, countId) {
+  const top = report[kind][0];
+  $(labelId).textContent = top ? top.label : 'Sem partidas';
+  const ties = top ? report[kind].filter(item => item.count === top.count).length : 0;
+  $(countId).textContent = top ? `${top.count} vitórias · ${pct(top.count, report.total)}` + (ties > 1 ? ` · empate entre ${ties} composições` : '') : 'Ajuste o período.';
+}
+
+function render() {
+  if (!dataset) return;
+  const start = $('inicio').value, end = $('fim').value;
+  if (start && end && start > end) {
+    $('status').textContent = 'A data inicial precisa ser anterior ou igual à data final.';
+    $('exportar-partidas').disabled = true;
+    $('exportar-resumo').disabled = true;
+    return;
+  }
+  $('exportar-partidas').disabled = false;
+  $('exportar-resumo').disabled = false;
+  $('status').textContent = '';
+  report = S.summarize(dataset, profiles, { start, end, ordered: $('ordem').value === 'players' });
+  $('total').textContent = report.total;
+  $('unicos').textContent = `${report.unique} campeões distintos neste período`;
+  const count = report.players[1]?.classes.Tank || 0;
+  $('tanque').textContent = pct(count, report.total);
+  $('tanque-contagem').textContent = `${count} de ${report.total} partidas`;
+  topComposition('classes', 'classe-top', 'classe-top-porcentagem');
+  topComposition('damage', 'dano-top', 'dano-top-porcentagem');
+  const dates = report.matches.map(m => m.date).sort();
+  $('periodo').textContent = dataset.players.join(' · ') + (dates.length ? ` | ${formatDate(dates[0])} a ${formatDate(dates.at(-1))}` : ' | Nenhuma partida no período');
+  const classes = [...S.classes];
+  if (report.players.some(p => p.classes.Unknown)) classes.push('Unknown');
+  table('tabela-classes', ['Jogador', ...classes.map(c => S.classNames[c])], report.players.map(p => [p.player, ...classes.map(c => statCell(p.classes[c] || 0))]));
+  table('tabela-dano', ['Jogador', ...S.damageTypes], report.players.map(p => [p.player, ...S.damageTypes.map(c => statCell(p.damage[c] || 0))]));
+  groupedChart('grafico-classes', classes, 'classes', palette, 'Participação das classes por jogador');
+  groupedChart('grafico-dano', S.damageTypes, 'damage', damagePalette, 'Perfis convencionais AD e AP por jogador');
+  $('ordem-nota').textContent = $('ordem').value === 'players' ? 'Ordem: ' + dataset.players.map(p => p.split('#')[0]).join(' → ') : 'Os mesmos três perfis contam juntos, independentemente de quem os jogou.';
+  table('tabela-composicoes', ['Composição de classes', 'Vitórias', '% das vitórias'], report.classes.map(c => [c.label, c.count, pct(c.count, report.total)]));
+  const bars = report.classes.slice(0, 5).map(item => {
+    const row = el('div'); row.className = 'barra-linha';
+    const title = el('div'); title.append(el('span', item.label), el('strong', item.count));
+    const track = el('div'); track.className = 'trilho';
+    const bar = el('div'); bar.style.width = item.count / report.classes[0].count * 100 + '%';
+    track.append(bar); row.append(title, track); return row;
+  });
+  $('grafico-composicoes').replaceChildren(...(bars.length ? bars : [el('p', 'Nenhuma partida no período.')]));
+  table('tabela-partidas', ['Data', ...dataset.players, 'Partida'], report.matches.map(m => {
+    const link = m.url ? el('a', 'Ver partida ↗') : el('span', 'Screenshot; sem link');
+    if (m.url) { link.href = m.url; link.target = '_blank'; link.rel = 'noopener noreferrer'; }
+    return [formatDate(m.date), ...m.champions.map(id => profiles[id]?.name || id), link];
+  }));
+}
+
+function profileEditor() {
+  const rows = Object.entries(profiles).sort((a, b) => a[1].name.localeCompare(b[1].name, 'pt-BR')).map(([id, profile]) => {
+    function select(field, values, names) {
+      const input = el('select');
+      input.dataset.champion = id; input.dataset.field = field;
+      input.setAttribute('aria-label', `${field === 'class' ? 'Classe' : 'Perfil AD/AP'} de ${profile.name}`);
+      values.forEach(value => { const option = el('option', names ? names[value] : value); option.value = value; input.append(option); });
+      input.value = profile[field];
+      return input;
+    }
+    return [profile.name, select('class', S.classes, S.classNames), select('damage', S.damageTypes)];
+  });
+  table('tabela-perfis', ['Campeão', 'Classe', 'Perfil convencional'], rows);
+}
+
+function exportFile(filename, rows) {
+  const url = URL.createObjectURL(new Blob([S.csv(rows)], { type: 'text/csv;charset=utf-8' }));
+  const a = el('a'); a.href = url; a.download = filename; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+$('exportar-partidas').addEventListener('click', () => {
+  if (!report) return;
+  const headings = ['Data', 'Partida', ...dataset.players.flatMap(p => [p + ' campeão', p + ' classe', p + ' perfil convencional'])];
+  exportFile('arena-partidas.csv', [headings, ...report.matches.map(m => [m.date, m.url || '', ...m.champions.flatMap(id => [profiles[id]?.name || id, S.classNames[profiles[id]?.class] || 'Não definido', profiles[id]?.damage || 'Não definido'])])]);
+});
+$('exportar-resumo').addEventListener('click', () => {
+  if (!report) return;
+  const mode = $('ordem').value === 'players' ? dataset.players.join(' | ') : 'Sem ordem dos jogadores';
+  const rows = [['Métrica', 'Jogador ou ordem', 'Categoria', 'Vitórias', 'Total de partidas', 'Percentual']];
+  for (const player of report.players) {
+    for (const [category, count] of Object.entries(player.classes)) rows.push(['Classe', player.player, S.classNames[category], count, report.total, pct(count, report.total)]);
+    for (const [category, count] of Object.entries(player.damage)) rows.push(['Perfil convencional', player.player, category, count, report.total, pct(count, report.total)]);
+  }
+  for (const kind of ['classes', 'damage']) for (const item of report[kind]) rows.push([kind === 'classes' ? 'Composição de classes' : 'Composição de perfis', mode, item.label, item.count, report.total, pct(item.count, report.total)]);
+  exportFile('arena-resumo.csv', rows);
+});
+$('imprimir').addEventListener('click', () => window.print());
+['inicio', 'fim', 'ordem'].forEach(id => $(id).addEventListener('change', render));
+$('limpar-filtros').addEventListener('click', () => { $('inicio').value = ''; $('fim').value = ''; render(); });
+$('tabela-perfis').addEventListener('change', e => {
+  const { champion, field } = e.target.dataset;
+  if (!profiles[champion] || !['class', 'damage'].includes(field)) return;
+  const next = { ...overrides, [champion]: { ...overrides[champion], [field]: e.target.value } };
+  try { localStorage.setItem(PROFILE_KEY, JSON.stringify(next)); }
+  catch { $('status').textContent = 'Não foi possível salvar a classificação neste navegador.'; profileEditor(); return; }
+  overrides = next;
+  profiles[champion][field] = e.target.value;
+  render();
+});
+$('restaurar-perfis').addEventListener('click', () => {
+  if (!confirm('Restaurar todas as classificações iniciais dos campeões?')) return;
+  try { localStorage.removeItem(PROFILE_KEY); }
+  catch { $('status').textContent = 'Não foi possível restaurar as classificações.'; return; }
+  overrides = {};
+  profiles = structuredClone(defaults.champions);
+  profileEditor(); render();
+});
+
+async function load() {
+  try {
+    async function json(url) { const response = await fetch(url, { cache: 'no-cache' }); if (!response.ok) throw new Error(); return response.json(); }
+    [dataset, defaults] = window.ArenaSnapshot || await Promise.all([json('data/arena-matches.json'), json('data/champion-profiles.json')]);
+    profiles = structuredClone(defaults.champions);
+    let storageWarning = false;
+    try {
+      const saved = JSON.parse(localStorage.getItem(PROFILE_KEY) || '{}');
+      for (const [id, values] of Object.entries(saved || {})) {
+        if (!Object.hasOwn(profiles, id) || !values || typeof values !== 'object') continue;
+        overrides[id] = {};
+        if (S.classes.includes(values.class)) overrides[id].class = values.class;
+        if (S.damageTypes.includes(values.damage)) overrides[id].damage = values.damage;
+        Object.assign(profiles[id], overrides[id]);
+      }
+    } catch { storageWarning = true; }
+    $('metodo-classes').textContent = `Classe inicial: primeira tag do Riot Data Dragon ${defaults.version}. Você pode ajustar a classe para representar o papel que o campeão teve na Arena.`;
+    $('metodo-dano').textContent = defaults.damageNote + ' Locke está sem perfil definido para revisão.';
+    $('fonte-classes').href = defaults.source;
+    profileEditor(); render();
+    if (storageWarning) $('status').textContent = 'As classificações salvas não puderam ser lidas. Exibindo as classificações iniciais.';
+  } catch { $('status').textContent = 'Não foi possível carregar as estatísticas. Verifique a conexão e recarregue a página.'; $('periodo').textContent = 'Histórico indisponível.'; }
+}
+load();
+</script>
+</body>
+</html>

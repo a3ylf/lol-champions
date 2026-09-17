@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LoL Champions - Ganhei ou Não?</title>
+<title>LoL Champions — 1º lugar na Arena</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -41,7 +41,7 @@
     outline: none;
   }
   #pesquisa:focus { border-color: #c8aa6e; }
-  .filtros button, .acoes button {
+  .filtros button, .acoes button, dialog button {
     padding: 10px 14px;
     border-radius: 4px;
     border: 1px solid #785a28;
@@ -119,19 +119,41 @@
   .ganhou .badge { background: #2ec4b6; }
   .vazio { text-align: center; color: #a09b8c; margin-top: 40px; grid-column: 1/-1; }
   .carregando { text-align: center; color: #c8aa6e; margin-top: 60px; font-size: 1.1rem; }
+  .subtitulo { text-align: center; color: #a09b8c; margin: -8px 0 24px; }
+  .subtitulo a { color: #2ec4b6; margin-left: 12px; }
+  button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid #2ec4b6; outline-offset: 3px; }
+  button:disabled { opacity: .5; cursor: wait; }
+  .card { cursor: default; }
+  .campeao { display: block; width: 100%; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; }
+  .data-vitoria { display: block; width: 100%; padding: 8px 4px; color: #2ec4b6; background: #101e2c; border: 0; cursor: pointer; font: inherit; font-size: .75rem; }
+  .data-vitoria:hover { background: #203446; }
+  #aviso { text-align: center; color: #f0e6d2; margin: 12px auto; max-width: 700px; }
+  #aviso:empty { display: none; }
+  dialog { margin: auto; width: min(480px, calc(100% - 32px)); padding: 24px; border: 1px solid #785a28; border-radius: 8px; background: #0a1428; color: #f0e6d2; }
+  dialog::backdrop { background: #000b; }
+  dialog h2 { color: #c8aa6e; font-size: 1.2rem; margin-bottom: 16px; }
+  dialog p { line-height: 1.5; margin: 12px 0; }
+  dialog label { display: block; margin: 16px 0 8px; }
+  dialog input { padding: 10px; width: 100%; background: #1e2328; color: #f0e6d2; border: 1px solid #785a28; border-radius: 4px; font: inherit; color-scheme: dark; }
+  dialog a { color: #2ec4b6; }
+  .botoes-dialogo { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .primario { background: #c8aa6e; color: #091428; font-weight: bold; }
+  [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <h1>Ganhei com todos?</h1>
+<p class="subtitulo">Arena · Só vale 1º lugar <a href="statistics.html">Estatísticas do grupo →</a></p>
 
 <div class="controles">
-  <input id="pesquisa" type="search" placeholder="Pesquisar campeão...">
+  <input id="pesquisa" type="search" placeholder="Pesquisar campeão..." aria-label="Pesquisar campeão">
   <div class="filtros">
     <button data-filtro="todos" class="ativo">Todos</button>
     <button data-filtro="ganhou">Ganhei</button>
     <button data-filtro="sem-marca">Falta ganhar</button>
   </div>
   <div class="acoes">
+    <button id="importar-historico">Importar histórico do grupo</button>
     <button id="marcar-todos-ganhou">Marcar todos como ganho</button>
     <button id="gerar-link">Copiar link com progresso</button>
     <button id="limpar">Limpar tudo</button>
@@ -140,126 +162,37 @@
 
 <div class="placar" id="placar"></div>
 <div class="barra"><div id="progresso"></div></div>
+<p id="aviso" role="status" aria-live="polite"></p>
 <div class="grade" id="grade"><p class="carregando">Carregando campeões...</p></div>
 
-<script>
-const API = 'https://ddragon.leagueoflegends.com';
-let campeoes = [];
-let versao = '';
-let filtro = 'todos';
-let busca = '';
-let marcas = JSON.parse(localStorage.getItem('lolMarcas') || '{}');
+<dialog id="importacao" aria-labelledby="titulo-importacao">
+  <h2 id="titulo-importacao">Importar progresso</h2>
+  <p id="resumo-importacao"></p>
+  <p>Mesclar adiciona vitórias e preenche datas ausentes. As datas que você já registrou são preservadas.</p>
+  <p id="explica-substituir">Substituir apaga o progresso atual e usa somente o conteúdo deste link.</p>
+  <div class="botoes-dialogo">
+    <button id="mesclar" class="primario">Mesclar progresso</button>
+    <button id="substituir">Substituir tudo</button>
+    <button id="cancelar-importacao">Cancelar</button>
+  </div>
+</dialog>
 
-function salvar() { localStorage.setItem('lolMarcas', JSON.stringify(marcas)); }
+<dialog id="editar-data" aria-labelledby="titulo-data">
+  <form id="form-data">
+    <h2 id="titulo-data">Data da vitória</h2>
+    <label for="data-vitoria">Data do 1º lugar</label>
+    <input id="data-vitoria" type="date">
+    <p>Deixe em branco se não souber a data. O histórico mostra a primeira vitória encontrada, que pode não ser a primeira de todas.</p>
+    <p id="jogador-vitoria"></p>
+    <a id="partida-vitoria" target="_blank" rel="noopener noreferrer" hidden>Ver partida no League of Graphs</a>
+    <div class="botoes-dialogo">
+      <button type="submit" class="primario">Salvar data</button>
+      <button type="button" id="cancelar-data">Cancelar</button>
+    </div>
+  </form>
+</dialog>
 
-async function carregar() {
-  try {
-    const versoes = await fetch(API + '/api/versions.json').then(r => r.json());
-    const versaoAtual = versoes[0];
-    versao = versaoAtual;
-    const dados = await fetch(`${API}/cdn/${versaoAtual}/data/pt_BR/champion.json`).then(r => r.json());
-    campeoes = Object.values(dados.data)
-      .map(c => ({ id: c.id, nome: c.name }))
-      .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
-  } catch (e) {
-    document.getElementById('grade').innerHTML =
-      '<p class="vazio">Não foi possível carregar os campeões. Verifique sua conexão.</p>';
-    return;
-  }
-  renderizar();
-}
-
-function alternarMarca(id) {
-  if (marcas[id]) delete marcas[id];
-  else marcas[id] = 'ganhou';
-  salvar();
-}
-
-function renderizar() {
-  const grade = document.getElementById('grade');
-  const termo = busca.trim().toLowerCase();
-  const lista = campeoes.filter(c => {
-    const m = marcas[c.id] || '';
-    if (termo && !c.nome.toLowerCase().includes(termo)) return false;
-    if (filtro === 'ganhou' && m !== 'ganhou') return false;
-    if (filtro === 'sem-marca' && m) return false;
-    return true;
-  });
-
-  if (!lista.length) {
-    grade.innerHTML = '<p class="vazio">Nenhum campeão encontrado.</p>';
-  } else {
-    grade.innerHTML = lista.map(c => {
-      const m = marcas[c.id] || '';
-      const badge = m === 'ganhou' ? '<div class="badge">✔</div>' : '';
-      return `<div class="card ${m}" data-id="${c.id}">
-        <img src="${API}/cdn/${versao}/img/champion/${c.id}.png" alt="${c.nome}" loading="lazy">
-        <span>${c.nome}</span>${badge}</div>`;
-    }).join('');
-  }
-
-  const totalGanhos = campeoes.filter(c => marcas[c.id] === 'ganhou').length;
-  const pct = campeoes.length ? (totalGanhos / campeoes.length * 100).toFixed(1) : 0;
-  document.getElementById('placar').innerHTML =
-    `Ganhos: <b>${totalGanhos}</b> de <b>${campeoes.length}</b> (${pct}%)`;
-  document.getElementById('progresso').style.width = pct + '%';
-}
-
-document.getElementById('grade').addEventListener('click', e => {
-  const card = e.target.closest('.card');
-  if (card) { alternarMarca(card.dataset.id); renderizar(); }
-});
-
-document.getElementById('pesquisa').addEventListener('input', e => {
-  busca = e.target.value;
-  renderizar();
-});
-
-document.querySelectorAll('.filtros button').forEach(b => {
-  b.addEventListener('click', () => {
-    document.querySelectorAll('.filtros button').forEach(x => x.classList.remove('ativo'));
-    b.classList.add('ativo');
-    filtro = b.dataset.filtro;
-    renderizar();
-  });
-});
-
-document.getElementById('marcar-todos-ganhou').addEventListener('click', () => {
-  if (!confirm('Marcar TODOS os campeões como ganho?')) return;
-  campeoes.forEach(c => marcas[c.id] = 'ganhou');
-  salvar();
-  renderizar();
-});
-
-document.getElementById('limpar').addEventListener('click', () => {
-  if (!confirm('Limpar todas as marcas?')) return;
-  marcas = {};
-  salvar();
-  renderizar();
-});
-
-document.getElementById('gerar-link').addEventListener('click', () => {
-  const ganhos = campeoes.filter(c => marcas[c.id] === 'ganhou').map(c => c.id).join('.');
-  const url = location.origin + location.pathname + '#p=' + ganhos;
-  navigator.clipboard.writeText(url)
-    .then(() => alert(`Link copiado! Ele tem ${ganhos ? ganhos.split('.').length : 0} vitórias. Abra em outro dispositivo para carregar.`))
-    .catch(() => prompt('Copie o link abaixo:', url));
-});
-
-function importarDoLink() {
-  if (!location.hash.startsWith('#p=')) return false;
-  const ids = decodeURIComponent(location.hash.slice(3)).split('.').filter(Boolean);
-  marcas = {};
-  ids.forEach(id => { if (id) marcas[id] = 'ganhou'; });
-  salvar();
-  history.replaceState(null, '', location.pathname);
-  return true;
-}
-
-if (importarDoLink()) {
-  alert('Progresso importado do link!');
-}
-carregar();
-</script>
+<script src="progress.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
