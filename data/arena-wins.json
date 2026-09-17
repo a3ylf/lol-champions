@@ -1,0 +1,295 @@
+{
+  "version": 2,
+  "wins": {
+    "Ahri": {
+      "date": null,
+      "player": null,
+      "match": null
+    },
+    "Alistar": {
+      "date": "2026-08-21",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3274783477"
+    },
+    "Ambessa": {
+      "date": "2026-08-21",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3274799698"
+    },
+    "Amumu": {
+      "date": "2026-08-19",
+      "player": "Tralhoto#Fish",
+      "match": null
+    },
+    "Ashe": {
+      "date": "2026-09-11",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3282089091"
+    },
+    "AurelionSol": {
+      "date": "2026-08-13",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3272125283"
+    },
+    "Belveth": {
+      "date": "2026-09-01",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3278398647"
+    },
+    "Blitzcrank": {
+      "date": "2026-08-28",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3277037822"
+    },
+    "Brand": {
+      "date": "2026-08-08",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3270489324"
+    },
+    "Braum": {
+      "date": "2026-08-08",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3270382867"
+    },
+    "Chogath": {
+      "date": "2026-08-08",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3270469181"
+    },
+    "Corki": {
+      "date": "2026-08-08",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3270489324"
+    },
+    "DrMundo": {
+      "date": null,
+      "player": null,
+      "match": null
+    },
+    "Fizz": {
+      "date": "2026-08-08",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3270469181"
+    },
+    "Galio": {
+      "date": "2026-09-11",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3282132259"
+    },
+    "Gragas": {
+      "date": "2026-09-11",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3282089091"
+    },
+    "Graves": {
+      "date": "2026-09-11",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3282089091"
+    },
+    "Gwen": {
+      "date": "2026-08-21",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3274730462"
+    },
+    "Illaoi": {
+      "date": "2026-08-25",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3276128300"
+    },
+    "Ivern": {
+      "date": "2026-08-25",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3276128300"
+    },
+    "Jhin": {
+      "date": "2026-08-21",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3274783477"
+    },
+    "Karthus": {
+      "date": "2026-08-13",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3272153336"
+    },
+    "Katarina": {
+      "date": "2026-09-12",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3282295642"
+    },
+    "Kayn": {
+      "date": "2026-08-08",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3270382867"
+    },
+    "Kennen": {
+      "date": "2026-08-24",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3275811136"
+    },
+    "Kindred": {
+      "date": "2026-08-13",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3272125283"
+    },
+    "LeeSin": {
+      "date": "2026-08-13",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3272153336"
+    },
+    "Locke": {
+      "date": "2026-08-25",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3276128300"
+    },
+    "Lux": {
+      "date": "2026-08-25",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3276079547"
+    },
+    "Maokai": {
+      "date": "2026-09-01",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3278398647"
+    },
+    "Nasus": {
+      "date": "2026-09-12",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3282295642"
+    },
+    "Orianna": {
+      "date": "2026-08-19",
+      "player": "eyeless#aespa",
+      "match": null
+    },
+    "Ornn": {
+      "date": "2026-08-08",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3270489324"
+    },
+    "Rakan": {
+      "date": "2026-08-25",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3276079547"
+    },
+    "Rumble": {
+      "date": "2026-09-12",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3282295642"
+    },
+    "Ryze": {
+      "date": "2026-08-19",
+      "player": "Cartografia#br1",
+      "match": null
+    },
+    "Senna": {
+      "date": "2026-08-25",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3276079547"
+    },
+    "Shaco": {
+      "date": "2026-08-21",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3274799698"
+    },
+    "Shen": {
+      "date": "2026-08-21",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3274799698"
+    },
+    "Shyvana": {
+      "date": "2026-08-13",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3272153336"
+    },
+    "Singed": {
+      "date": "2026-08-24",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3275811136"
+    },
+    "Sion": {
+      "date": "2026-08-08",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3270469181"
+    },
+    "Sona": {
+      "date": "2026-08-13",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3272133374"
+    },
+    "Sylas": {
+      "date": "2026-09-11",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3282132259"
+    },
+    "TahmKench": {
+      "date": "2026-08-13",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3272125283"
+    },
+    "Talon": {
+      "date": "2026-08-13",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3272133374"
+    },
+    "Taric": {
+      "date": "2026-08-28",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3277037822"
+    },
+    "Thresh": {
+      "date": "2026-08-25",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3276165629"
+    },
+    "Tristana": {
+      "date": "2026-08-24",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3275811136"
+    },
+    "Twitch": {
+      "date": "2026-08-25",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3276165629"
+    },
+    "Udyr": {
+      "date": "2026-08-25",
+      "player": "eyeless#aespa",
+      "match": "https://www.leagueofgraphs.com/match/br/3276165629"
+    },
+    "Vayne": {
+      "date": "2026-09-11",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3282132259"
+    },
+    "Viego": {
+      "date": "2026-09-01",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3278398647"
+    },
+    "Xerath": {
+      "date": null,
+      "player": null,
+      "match": null
+    },
+    "Yorick": {
+      "date": "2026-08-21",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3274730462"
+    },
+    "Zaahen": {
+      "date": "2026-08-08",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3270382867"
+    },
+    "Zeri": {
+      "date": "2026-08-28",
+      "player": "Tralhoto#Fish",
+      "match": "https://www.leagueofgraphs.com/match/br/3277037822"
+    },
+    "Ziggs": {
+      "date": "2026-08-21",
+      "player": "Cartografia#br1",
+      "match": "https://www.leagueofgraphs.com/match/br/3274783477"
+    }
+  }
+}

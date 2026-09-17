@@ -1,0 +1,180 @@
+{
+  "players": [
+    "Cartografia#br1",
+    "Tralhoto#Fish",
+    "eyeless#aespa"
+  ],
+  "matches": [
+    {
+      "date": "2026-09-12",
+      "champions": [
+        "Rumble",
+        "Katarina",
+        "Nasus"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3282295642"
+    },
+    {
+      "date": "2026-09-11",
+      "champions": [
+        "Vayne",
+        "Sylas",
+        "Galio"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3282132259"
+    },
+    {
+      "date": "2026-09-11",
+      "champions": [
+        "Ashe",
+        "Gragas",
+        "Graves"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3282089091"
+    },
+    {
+      "date": "2026-09-01",
+      "champions": [
+        "Belveth",
+        "Viego",
+        "Maokai"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3278398647"
+    },
+    {
+      "date": "2026-08-28",
+      "champions": [
+        "Taric",
+        "Zeri",
+        "Blitzcrank"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3277037822"
+    },
+    {
+      "date": "2026-08-25",
+      "champions": [
+        "Twitch",
+        "Thresh",
+        "Udyr"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3276165629"
+    },
+    {
+      "date": "2026-08-25",
+      "champions": [
+        "Locke",
+        "Illaoi",
+        "Ivern"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3276128300"
+    },
+    {
+      "date": "2026-08-25",
+      "champions": [
+        "Senna",
+        "Lux",
+        "Rakan"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3276079547"
+    },
+    {
+      "date": "2026-08-24",
+      "champions": [
+        "Tristana",
+        "Kennen",
+        "Singed"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3275811136"
+    },
+    {
+      "date": "2026-08-21",
+      "champions": [
+        "Shaco",
+        "Ambessa",
+        "Shen"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3274799698"
+    },
+    {
+      "date": "2026-08-21",
+      "champions": [
+        "Ziggs",
+        "Jhin",
+        "Alistar"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3274783477"
+    },
+    {
+      "date": "2026-08-21",
+      "champions": [
+        "Yorick",
+        "Brand",
+        "Gwen"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3274730462"
+    },
+    {
+      "date": "2026-08-19",
+      "champions": [
+        "Ryze",
+        "Amumu",
+        "Orianna"
+      ],
+      "url": null
+    },
+    {
+      "date": "2026-08-13",
+      "champions": [
+        "LeeSin",
+        "Karthus",
+        "Shyvana"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3272153336"
+    },
+    {
+      "date": "2026-08-13",
+      "champions": [
+        "Sona",
+        "Fizz",
+        "Talon"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3272133374"
+    },
+    {
+      "date": "2026-08-13",
+      "champions": [
+        "Kindred",
+        "AurelionSol",
+        "TahmKench"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3272125283"
+    },
+    {
+      "date": "2026-08-08",
+      "champions": [
+        "Brand",
+        "Corki",
+        "Ornn"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3270489324"
+    },
+    {
+      "date": "2026-08-08",
+      "champions": [
+        "Fizz",
+        "Chogath",
+        "Sion"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3270469181"
+    },
+    {
+      "date": "2026-08-08",
+      "champions": [
+        "Braum",
+        "Zaahen",
+        "Kayn"
+      ],
+      "url": "https://www.leagueofgraphs.com/match/br/3270382867"
+    }
+  ]
+}
