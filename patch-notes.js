@@ -9,25 +9,49 @@
     const query = normalize($(search).value);
     let found = 0;
     for (const group of groups) {
-      const champions = data[group].filter(champion => normalize(champion.name).includes(query) || normalize(champion.id).includes(query));
-      found += champions.length;
-      $('total-' + prefix + group).textContent = champions.length;
+      const entries = data[group].filter(entry => normalize(entry.name).includes(query) || normalize(entry.id).includes(query));
+      found += entries.length;
+      $('total-' + prefix + group).textContent = entries.length;
       const fragment = document.createDocumentFragment();
-      for (const champion of champions) {
+      for (const entry of entries) {
         const card = document.createElement('article');
         card.className = 'mudanca';
         const title = document.createElement(prefix ? 'h4' : 'h3');
-        title.textContent = champion.name;
+        title.textContent = entry.name;
         const list = document.createElement('ul');
-        for (const change of champion.changes) {
+        for (const change of entry.changes) {
           const item = document.createElement('li');
-          item.textContent = change;
+          const label = document.createElement('span');
+          label.className = 'atributo';
+          label.textContent = change.label;
+          item.append(label);
+          if (change.before !== undefined && change.after !== undefined) {
+            const values = document.createElement('div');
+            values.className = 'valores';
+            for (const [key, name] of [['before', 'Antes'], ['after', 'Depois']]) {
+              const value = document.createElement('span');
+              value.className = key;
+              const caption = document.createElement('small');
+              caption.textContent = name;
+              const number = document.createElement('strong');
+              number.textContent = change[key];
+              value.append(caption, number);
+              values.append(value);
+            }
+            item.append(values);
+          }
+          if (change.note) {
+            const note = document.createElement('p');
+            note.className = 'nota-mudanca';
+            note.textContent = change.note;
+            item.append(note);
+          }
           list.append(item);
         }
         card.append(title, list);
         fragment.append(card);
       }
-      if (!champions.length) {
+      if (!entries.length) {
         const empty = document.createElement('p');
         empty.className = 'vazio';
         empty.textContent = query ? `Nenhum ${noun} corresponde à busca neste grupo.` : 'Nenhuma mudança neste grupo neste patch.';
@@ -51,7 +75,7 @@
     $('status').textContent = 'Carregando patch notes…';
     $('tentar-novamente').hidden = true;
     try {
-      const response = await fetch('data/arena-patch-notes.json', { cache: 'no-cache' });
+      const response = await fetch('data/arena-patch-notes.json?v=3', { cache: 'no-cache' });
       if (!response.ok) throw new Error('Falha ao carregar patch notes');
       patch = await response.json();
       $('patch-titulo').textContent = `Patch ${patch.patch}`;
