@@ -18,7 +18,16 @@ input { width: 100%; min-width: 0; }
 .descricao-grupo { margin: 0 0 18px; font-size: .85rem; }
 .mudanca { padding: 18px; margin-bottom: 12px; border: 1px solid #334058; border-radius: 6px; background: #101d32; }
 .mudanca h3, .mudanca h4 { margin: 0 0 10px; font-size: 1rem; }
-.mudanca ul { padding-left: 20px; margin: 0; color: #c5c9d1; font-size: .9rem; line-height: 1.6; }
-.mudanca li + li { margin-top: 6px; }
+.mudanca ul { padding: 0; margin: 0; list-style: none; color: #c5c9d1; font-size: .9rem; line-height: 1.6; }
+.mudanca li + li { margin-top: 16px; padding-top: 12px; border-top: 1px solid #334058; }
+.atributo { display: block; margin-bottom: 6px; }
+.valores { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; font-variant-numeric: tabular-nums; }
+.valores > span { min-width: 0; padding: 8px 10px; border-radius: 4px; background: #17253c; }
+.valores small { display: block; color: #b1b8c5; font-size: .7rem; }
+.valores strong { display: block; overflow-wrap: anywhere; font-size: .88rem; }
+.valores .after { border-left: 2px solid var(--accent); }
+.valores .after strong { color: var(--accent); }
+.nota-mudanca, .legenda-valores { color: #b1b8c5; font-size: .8rem; }
+.nota-mudanca { margin: 8px 0 0; }
 .vazio { padding: 22px; border: 1px dashed #334058; border-radius: 6px; font-size: .9rem; }
 @media (max-width: 650px) { .mudancas { grid-template-columns: 1fr; } .filtros label { max-width: none; } }

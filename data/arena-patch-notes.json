@@ -4,25 +4,250 @@
   "reviewedAt": "2026-09-23",
   "source": "https://www.leagueoflegends.com/pt-br/news/game-updates/league-of-legends-patch-26-19-notes/#patch-arena",
   "buffs": [
-    { "id": "Aphelios", "name": "Aphelios", "changes": ["Mais Vida e DdA por nível; movimentação maior."] },
-    { "id": "Bard", "name": "Bardo", "changes": ["Passiva: melhoria a cada 3 sinos (antes: 4)."] },
-    { "id": "Elise", "name": "Elise", "changes": ["Recargas reduzidas em 4s no E e 2s no W."] },
-    { "id": "Ezreal", "name": "Ezreal", "changes": ["Q: restituição de recarga maior."] },
-    { "id": "LeeSin", "name": "Lee Sin", "changes": ["W: escala com 120% do PdH (antes: 80%)."] },
-    { "id": "Locke", "name": "Locke", "changes": ["Passiva causa mais dano; R dobra porcentagem por acúmulo."] },
-    { "id": "Neeko", "name": "Neeko", "changes": ["Q secundário: 50% do PdH (antes: 25%)."] },
-    { "id": "Zeri", "name": "Zeri", "changes": ["Q ganha escalamento de DdA; E restitui mais."] }
+    {
+      "id": "Aphelios",
+      "name": "Aphelios",
+      "changes": [
+        {
+          "label": "Vida por nível",
+          "before": "102",
+          "after": "114"
+        },
+        {
+          "label": "DdA por nível",
+          "before": "2,3",
+          "after": "3,3"
+        },
+        {
+          "label": "Velocidade de Movimento",
+          "before": "325",
+          "after": "330"
+        }
+      ]
+    },
+    {
+      "id": "Bard",
+      "name": "Bardo",
+      "changes": [
+        {
+          "label": "Passiva — sinos por melhoria",
+          "before": "4",
+          "after": "3"
+        }
+      ]
+    },
+    {
+      "id": "Elise",
+      "name": "Elise",
+      "changes": [
+        {
+          "label": "E — recarga",
+          "before": "12/11,5/11/10,5/10s",
+          "after": "8/7,5/7/6,5/6s"
+        },
+        {
+          "label": "W — recarga",
+          "before": "12s",
+          "after": "10s"
+        }
+      ]
+    },
+    {
+      "id": "Ezreal",
+      "name": "Ezreal",
+      "changes": [
+        {
+          "label": "Q — restituição de recarga",
+          "before": "1,5",
+          "after": "2,5"
+        }
+      ]
+    },
+    {
+      "id": "LeeSin",
+      "name": "Lee Sin",
+      "changes": [
+        {
+          "label": "W — multiplicador de PdH",
+          "before": "80%",
+          "after": "120%"
+        }
+      ]
+    },
+    {
+      "id": "Locke",
+      "name": "Locke",
+      "changes": [
+        {
+          "label": "Passiva — dano mínimo",
+          "before": "7,5–60",
+          "after": "10–80"
+        },
+        {
+          "label": "Passiva — dano máximo",
+          "before": "15–120",
+          "after": "20–160"
+        },
+        {
+          "label": "R — porcentagem por acúmulo",
+          "before": "0,5",
+          "after": "1"
+        }
+      ]
+    },
+    {
+      "id": "Neeko",
+      "name": "Neeko",
+      "changes": [
+        {
+          "label": "Q — multiplicador de PdH do acerto secundário",
+          "before": "25%",
+          "after": "50%"
+        }
+      ]
+    },
+    {
+      "id": "Zeri",
+      "name": "Zeri",
+      "changes": [
+        {
+          "label": "Q — multiplicador de DdA",
+          "before": "102%–110%",
+          "after": "107%–115%"
+        },
+        {
+          "label": "E — restituição",
+          "before": "0,75",
+          "after": "1"
+        }
+      ]
+    }
   ],
   "nerfs": [
-    { "id": "Belveth", "name": "Bel'Veth", "changes": ["E aplica efeitos com menos eficácia; R perde escalamento."] },
-    { "id": "DrMundo", "name": "Dr. Mundo", "changes": ["E: escalamentos de Vida reduzidos, ativo e passivo."] },
-    { "id": "Lillia", "name": "Lillia", "changes": ["Passiva: 3% da Vida máxima (antes: 4%)."] },
-    { "id": "Ornn", "name": "Ornn", "changes": ["Passiva: descontos menores em atributos e Lendários."] },
-    { "id": "Rammus", "name": "Rammus", "changes": ["Q: recarga aumenta em 1s."] },
-    { "id": "Rell", "name": "Rell", "changes": ["Passiva rouba menos atributos."] },
-    { "id": "Sion", "name": "Sion", "changes": ["Passiva: 111 acúmulos por rodada (antes: 133)."] },
-    { "id": "Veigar", "name": "Veigar", "changes": ["Passiva acumula menos por rodada; E demora mais."] },
-    { "id": "Zed", "name": "Zed", "changes": ["Q perde escalamento; W tem recarga maior."] }
+    {
+      "id": "Belveth",
+      "name": "Bel'Veth",
+      "changes": [
+        {
+          "label": "E — eficácia ao atacar/ao contato",
+          "before": "12–24",
+          "after": "8–16"
+        },
+        {
+          "label": "R — multiplicador de DdA adicional da passiva",
+          "before": "3",
+          "after": "1"
+        }
+      ]
+    },
+    {
+      "id": "DrMundo",
+      "name": "Dr. Mundo",
+      "changes": [
+        {
+          "label": "E ativo — multiplicador de Vida mínima",
+          "before": "5",
+          "after": "4"
+        },
+        {
+          "label": "E passivo — multiplicador de Vida",
+          "before": "2–3,2",
+          "after": "1,5–2,7"
+        }
+      ]
+    },
+    {
+      "id": "Lillia",
+      "name": "Lillia",
+      "changes": [
+        {
+          "label": "Passiva — porcentagem da Vida máxima",
+          "before": "4%",
+          "after": "3%"
+        }
+      ]
+    },
+    {
+      "id": "Ornn",
+      "name": "Ornn",
+      "changes": [
+        {
+          "label": "Passiva — desconto de atributo",
+          "before": "100",
+          "after": "75"
+        },
+        {
+          "label": "Passiva — desconto Lendário",
+          "before": "200",
+          "after": "150"
+        }
+      ]
+    },
+    {
+      "id": "Rammus",
+      "name": "Rammus",
+      "changes": [
+        {
+          "label": "Q — recarga",
+          "before": "11/9,5/8/6,5/5s",
+          "after": "12/10,5/9/7,5/6s"
+        }
+      ]
+    },
+    {
+      "id": "Rell",
+      "name": "Rell",
+      "changes": [
+        {
+          "label": "Passiva — roubo de atributos",
+          "before": "3%–15%",
+          "after": "2%–10%"
+        }
+      ]
+    },
+    {
+      "id": "Sion",
+      "name": "Sion",
+      "changes": [
+        {
+          "label": "Passiva — acúmulos por rodada",
+          "before": "133",
+          "after": "111"
+        }
+      ]
+    },
+    {
+      "id": "Veigar",
+      "name": "Veigar",
+      "changes": [
+        {
+          "label": "Passiva — acúmulos por rodada",
+          "before": "12",
+          "after": "10"
+        },
+        {
+          "label": "E — recarga",
+          "before": "23/21,75/20,5/19,25/18s",
+          "after": "24/23/22/21/20s"
+        }
+      ]
+    },
+    {
+      "id": "Zed",
+      "name": "Zed",
+      "changes": [
+        {
+          "label": "Q — multiplicador de DdA adicional",
+          "before": "110%",
+          "after": "100%"
+        },
+        {
+          "label": "W — recarga",
+          "before": "18–15s",
+          "after": "20–16s"
+        }
+      ]
+    }
   ],
   "items": {
     "patch": "26.17",
@@ -30,18 +255,105 @@
     "source": "https://www.leagueoflegends.com/pt-br/news/game-updates/league-of-legends-patch-26-17-notes/#patch-arena",
     "note": "Os patches 26.18 e 26.19 não listam mudanças específicas de itens do Arena. Abaixo estão as últimas alterações publicadas, do patch 26.17.",
     "buffs": [
-      { "id": "SwordOfBlossomingDawn", "name": "Espada da Alvorada Florescente", "changes": ["Escalamento com PdH aumentado de 7% para 10%."] },
-      { "id": "MortalReminder", "name": "Lembrete Mortal", "changes": ["DdA aumentado de 30 para 40."] },
-      { "id": "LordDominiksRegards", "name": "Lembranças do Lorde Dominik", "changes": ["DdA aumentado de 30 para 45."] },
-      { "id": "SeryldasGrudge", "name": "Rancor de Serylda", "changes": ["Limiar para aplicar lentidão aumentado de 50% para 60%.", "Penetração de armadura aumentada de 40% para 45%."] }
+      {
+        "id": "SwordOfBlossomingDawn",
+        "name": "Espada da Alvorada Florescente",
+        "changes": [
+          {
+            "label": "Multiplicador de PdH",
+            "before": "7%",
+            "after": "10%"
+          }
+        ]
+      },
+      {
+        "id": "MortalReminder",
+        "name": "Lembrete Mortal",
+        "changes": [
+          {
+            "label": "DdA",
+            "before": "30",
+            "after": "40"
+          }
+        ]
+      },
+      {
+        "id": "LordDominiksRegards",
+        "name": "Lembranças do Lorde Dominik",
+        "changes": [
+          {
+            "label": "DdA",
+            "before": "30",
+            "after": "45"
+          }
+        ]
+      },
+      {
+        "id": "SeryldasGrudge",
+        "name": "Rancor de Serylda",
+        "changes": [
+          {
+            "label": "Limiar de Lentidão",
+            "before": "50%",
+            "after": "60%"
+          },
+          {
+            "label": "Penetração de Armadura",
+            "before": "40%",
+            "after": "45%"
+          }
+        ]
+      }
     ],
     "nerfs": [
-      { "id": "StaffOfFlowingWater", "name": "Cajado Aquafluxo", "changes": ["Curas e escudos: bônus reduzido de 14% para 10%."] },
-      { "id": "Redemption", "name": "Redenção", "changes": ["Curas e escudos: bônus reduzido de 12% para 10%."] },
-      { "id": "ArdentCenser", "name": "Turíbulo Ardente", "changes": ["Curas e escudos: bônus reduzido de 12% para 10%."] }
+      {
+        "id": "StaffOfFlowingWater",
+        "name": "Cajado Aquafluxo",
+        "changes": [
+          {
+            "label": "Potência de cura e escudo",
+            "before": "14%",
+            "after": "10%",
+            "note": "Removido o modificador exclusivo do Arena."
+          }
+        ]
+      },
+      {
+        "id": "Redemption",
+        "name": "Redenção",
+        "changes": [
+          {
+            "label": "Potência de cura e escudo",
+            "before": "12%",
+            "after": "10%",
+            "note": "Removido o modificador exclusivo do Arena."
+          }
+        ]
+      },
+      {
+        "id": "ArdentCenser",
+        "name": "Turíbulo Ardente",
+        "changes": [
+          {
+            "label": "Potência de cura e escudo",
+            "before": "12%",
+            "after": "10%",
+            "note": "Removido o modificador exclusivo do Arena."
+          }
+        ]
+      }
     ],
     "fixes": [
-      { "id": "SpectralCutlass", "name": "Alfanje Espectral", "changes": ["Corrigida a concessão duplicada de Letalidade."] }
+      {
+        "id": "SpectralCutlass",
+        "name": "Alfanje Espectral",
+        "changes": [
+          {
+            "label": "Letalidade",
+            "note": "Corrigida a concessão em dobro de Letalidade. A Riot não informa um valor absoluto para esta correção."
+          }
+        ]
+      }
     ]
   }
 }
