@@ -23,5 +23,25 @@
     { "id": "Sion", "name": "Sion", "changes": ["Passiva: 111 acúmulos por rodada (antes: 133)."] },
     { "id": "Veigar", "name": "Veigar", "changes": ["Passiva acumula menos por rodada; E demora mais."] },
     { "id": "Zed", "name": "Zed", "changes": ["Q perde escalamento; W tem recarga maior."] }
-  ]
+  ],
+  "items": {
+    "patch": "26.17",
+    "publishedAt": "2026-08-25",
+    "source": "https://www.leagueoflegends.com/pt-br/news/game-updates/league-of-legends-patch-26-17-notes/#patch-arena",
+    "note": "Os patches 26.18 e 26.19 não listam mudanças específicas de itens do Arena. Abaixo estão as últimas alterações publicadas, do patch 26.17.",
+    "buffs": [
+      { "id": "SwordOfBlossomingDawn", "name": "Espada da Alvorada Florescente", "changes": ["Escalamento com PdH aumentado de 7% para 10%."] },
+      { "id": "MortalReminder", "name": "Lembrete Mortal", "changes": ["DdA aumentado de 30 para 40."] },
+      { "id": "LordDominiksRegards", "name": "Lembranças do Lorde Dominik", "changes": ["DdA aumentado de 30 para 45."] },
+      { "id": "SeryldasGrudge", "name": "Rancor de Serylda", "changes": ["Limiar para aplicar lentidão aumentado de 50% para 60%.", "Penetração de armadura aumentada de 40% para 45%."] }
+    ],
+    "nerfs": [
+      { "id": "StaffOfFlowingWater", "name": "Cajado Aquafluxo", "changes": ["Curas e escudos: bônus reduzido de 14% para 10%."] },
+      { "id": "Redemption", "name": "Redenção", "changes": ["Curas e escudos: bônus reduzido de 12% para 10%."] },
+      { "id": "ArdentCenser", "name": "Turíbulo Ardente", "changes": ["Curas e escudos: bônus reduzido de 12% para 10%."] }
+    ],
+    "fixes": [
+      { "id": "SpectralCutlass", "name": "Alfanje Espectral", "changes": ["Corrigida a concessão duplicada de Letalidade."] }
+    ]
+  }
 }

@@ -63,11 +63,18 @@ but do not change the original dataset or travel in champion progress links.
 lists and champion search. The local snapshot covers champion changes in the
 Arena section of Riot's patch 26.19 notes, published September 22, 2026 and
 reviewed September 23. Each entry is a brief summary; the page links to the
-complete official notes for exact values and changes to augments and items.
+complete official notes for exact values and changes to augments.
+
+Item changes appear below champions, with their own search, source and patch
+date, grouped into buffs, nerfs and bug fixes. Patches 26.18 and 26.19 have no
+Arena-specific item changes; the item section explicitly shows the last such
+changes from patch 26.17 (four buffs, three nerfs and one bug fix).
 
 Update `data/arena-patch-notes.json` manually after reviewing a new patch:
 replace the patch number, publication/review dates, official source URL, and
-both champion lists. These notes do not update automatically. Include only
+both champion lists and the `items` snapshot (patch, date, source, note and
+buff/nerf/fix lists). Keep the item patch explicit when its changes come from
+an earlier release. These notes do not update automatically. Include only
 Arena-specific champion changes and keep each champion in the appropriate
 buff or nerf list; mixed changes should be described explicitly rather than
 silently classified as a pure buff or nerf.
