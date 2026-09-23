@@ -1,0 +1,27 @@
+{
+  "patch": "26.19",
+  "publishedAt": "2026-09-22",
+  "reviewedAt": "2026-09-23",
+  "source": "https://www.leagueoflegends.com/pt-br/news/game-updates/league-of-legends-patch-26-19-notes/#patch-arena",
+  "buffs": [
+    { "id": "Aphelios", "name": "Aphelios", "changes": ["Mais Vida e DdA por nível; movimentação maior."] },
+    { "id": "Bard", "name": "Bardo", "changes": ["Passiva: melhoria a cada 3 sinos (antes: 4)."] },
+    { "id": "Elise", "name": "Elise", "changes": ["Recargas reduzidas em 4s no E e 2s no W."] },
+    { "id": "Ezreal", "name": "Ezreal", "changes": ["Q: restituição de recarga maior."] },
+    { "id": "LeeSin", "name": "Lee Sin", "changes": ["W: escala com 120% do PdH (antes: 80%)."] },
+    { "id": "Locke", "name": "Locke", "changes": ["Passiva causa mais dano; R dobra porcentagem por acúmulo."] },
+    { "id": "Neeko", "name": "Neeko", "changes": ["Q secundário: 50% do PdH (antes: 25%)."] },
+    { "id": "Zeri", "name": "Zeri", "changes": ["Q ganha escalamento de DdA; E restitui mais."] }
+  ],
+  "nerfs": [
+    { "id": "Belveth", "name": "Bel'Veth", "changes": ["E aplica efeitos com menos eficácia; R perde escalamento."] },
+    { "id": "DrMundo", "name": "Dr. Mundo", "changes": ["E: escalamentos de Vida reduzidos, ativo e passivo."] },
+    { "id": "Lillia", "name": "Lillia", "changes": ["Passiva: 3% da Vida máxima (antes: 4%)."] },
+    { "id": "Ornn", "name": "Ornn", "changes": ["Passiva: descontos menores em atributos e Lendários."] },
+    { "id": "Rammus", "name": "Rammus", "changes": ["Q: recarga aumenta em 1s."] },
+    { "id": "Rell", "name": "Rell", "changes": ["Passiva rouba menos atributos."] },
+    { "id": "Sion", "name": "Sion", "changes": ["Passiva: 111 acúmulos por rodada (antes: 133)."] },
+    { "id": "Veigar", "name": "Veigar", "changes": ["Passiva acumula menos por rodada; E demora mais."] },
+    { "id": "Zed", "name": "Zed", "changes": ["Q perde escalamento; W tem recarga maior."] }
+  ]
+}

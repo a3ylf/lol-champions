@@ -57,6 +57,21 @@ explicitly revisable conventions, not observed builds or measured damage;
 Locke is left undefined for review. Browser overrides affect charts and exports
 but do not change the original dataset or travel in champion progress links.
 
+## Arena patch notes
+
+**Patch notes do Arena** opens `patch-notes.html`, with separate buff and nerf
+lists and champion search. The local snapshot covers champion changes in the
+Arena section of Riot's patch 26.19 notes, published September 22, 2026 and
+reviewed September 23. Each entry is a brief summary; the page links to the
+complete official notes for exact values and changes to augments and items.
+
+Update `data/arena-patch-notes.json` manually after reviewing a new patch:
+replace the patch number, publication/review dates, official source URL, and
+both champion lists. These notes do not update automatically. Include only
+Arena-specific champion changes and keep each champion in the appropriate
+buff or nerf list; mixed changes should be described explicitly rather than
+silently classified as a pure buff or nerf.
+
 ## Update the reviewed history
 
 1. Add full team matches to `data/arena-win-matches.csv`.

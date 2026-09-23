@@ -57,10 +57,22 @@ footer { font-size: .8rem; color: #a2acbb; line-height: 1.8; margin-top: 24px; }
 @media (max-width: 550px) { main { padding: 16px; } nav span { display: none; } .indicadores { grid-template-columns: 1fr; } .painel { padding: 16px; } }
 @media print { :root { color-scheme: light; color: #142238; background: white; } main { max-width: none; padding: 0; } nav, .filtros, details, footer { display: none; } header { margin-top: 0; } .nota, .painel, .indicadores article { background: white; border-color: #bbb; break-inside: avoid; } p, th, td, .indicadores h2 { color: #333; } .indicadores strong { color: #725419; } .grafico text { fill: #333; } .legenda { color: #333; } .indicadores { grid-template-columns: repeat(4, 1fr); } .paineis { grid-template-columns: 1fr; } }
 </style>
+  <style>
+.site-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 auto 28px; font-size: .9rem; letter-spacing: normal; }
+.site-nav a { padding: 10px 16px; border: 1px solid #785a28; border-radius: 4px; color: #f0e6d2; text-decoration: none; background: #101d32; }
+.site-nav a:hover { border-color: #c8aa6e; }
+.site-nav a[aria-current="page"] { background: #c8aa6e; color: #091428; font-weight: 600; }
+.site-nav a:focus-visible { outline: 2px solid #55d4c4; outline-offset: 3px; }
+@media print { .site-nav { display: none; } }
+</style>
 </head>
 <body>
 <main>
-  <nav><a href="https://a3ylf.github.io/lol-champions/">← Campeões e datas</a><span>ARENA · 1º LUGAR</span></nav>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a href="https://a3ylf.github.io/lol-champions/">Campeões</a>
+    <a href="#" aria-current="page">Estatísticas do grupo</a>
+    <a href="https://a3ylf.github.io/lol-champions/patch-notes.html">Patch notes do Arena</a>
+  </nav>
   <header><p class="eyebrow">O histórico do grupo</p><h1>Como a gente vence</h1><p id="periodo">Carregando partidas…</p></header>
   <p class="nota">Este painel usa as partidas completas do histórico do grupo. Marcar um campeão na grade não cria uma partida aqui: faltariam os outros jogadores e a composição. Os percentuais mostram a participação nas vitórias registradas; sem derrotas, não há taxa de vitória.</p>
   <p id="status" role="status" aria-live="polite"></p>
