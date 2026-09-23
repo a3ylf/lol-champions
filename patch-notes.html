@@ -18,7 +18,7 @@
   <header>
     <p class="eyebrow">Balanceamento · Arena</p>
     <h1>Patch notes do Arena</h1>
-    <p>Veja quem ficou mais forte e quem recebeu nerfs.</p>
+    <p>Buffs, nerfs e correções de campeões e itens.</p>
   </header>
   <p id="status" role="status" aria-live="polite">Carregando patch notes…</p>
   <button id="tentar-novamente" hidden>Tentar novamente</button>
@@ -28,7 +28,7 @@
       <div><h2 id="patch-titulo"></h2><p id="patch-data"></p></div>
       <a id="fonte" target="_blank" rel="noopener noreferrer">Notas completas na Riot ↗</a>
     </section>
-    <p class="nota">Resumo das mudanças de campeões na seção Arena das notas oficiais. Aprimoramentos, itens e outras mudanças estão nas notas completas. Revisão manual em <span id="revisao"></span>.</p>
+    <p class="nota">Resumo das mudanças de campeões e itens na seção Arena das notas oficiais. O patch de cada seção está indicado. Aprimoramentos e outras mudanças estão nas notas completas. Revisão manual em <span id="revisao"></span>.</p>
     <div class="filtros">
       <label for="pesquisa-patch">Pesquisar campeão
         <input id="pesquisa-patch" type="search" placeholder="Ex.: Zeri, Bardo, Zed" autocomplete="off">
@@ -48,6 +48,34 @@
         <div id="nerfs"></div>
       </section>
     </div>
+    <section id="itens" aria-labelledby="titulo-itens">
+      <div class="patch-info">
+        <div><h2 id="titulo-itens">Itens do Arena</h2><p id="patch-itens"></p></div>
+        <a id="fonte-itens" target="_blank" rel="noopener noreferrer">Notas dos itens na Riot ↗</a>
+      </div>
+      <p id="nota-itens" class="nota"></p>
+      <div class="filtros">
+        <label for="pesquisa-itens">Pesquisar item
+          <input id="pesquisa-itens" type="search" placeholder="Ex.: Redenção, Serylda" autocomplete="off">
+        </label>
+        <button id="limpar-itens">Limpar busca de itens</button>
+      </div>
+      <p id="resultado-itens" role="status" aria-live="polite"></p>
+      <div class="mudancas">
+        <section class="grupo buffs" aria-labelledby="titulo-itens-buffs">
+          <h3 id="titulo-itens-buffs">↑ Itens buffados <span id="total-itens-buffs" class="contagem"></span></h3>
+          <div id="itens-buffs"></div>
+        </section>
+        <section class="grupo nerfs" aria-labelledby="titulo-itens-nerfs">
+          <h3 id="titulo-itens-nerfs">↓ Itens nerfados <span id="total-itens-nerfs" class="contagem"></span></h3>
+          <div id="itens-nerfs"></div>
+        </section>
+        <section class="grupo correcoes" aria-labelledby="titulo-itens-fixes">
+          <h3 id="titulo-itens-fixes">Correções de itens <span id="total-itens-fixes" class="contagem"></span></h3>
+          <div id="itens-fixes"></div>
+        </section>
+      </div>
+    </section>
   </div>
 </main>
 <script src="patch-notes.js"></script>

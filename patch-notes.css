@@ -6,16 +6,18 @@ main { max-width: 1120px; }
 .patch-info a { font-size: .9rem; }
 .filtros label { flex: 1; max-width: 420px; }
 input { width: 100%; min-width: 0; }
-#resultado { font-size: .85rem; }
+#resultado, #resultado-itens { font-size: .85rem; }
+#itens { margin-top: 40px; padding-top: 28px; border-top: 2px solid #c8aa6e; }
 .mudancas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
 .grupo { min-width: 0; border-top: 3px solid var(--accent); padding-top: 18px; }
 .buffs { --accent: #55d4c4; }
 .nerfs { --accent: #ff929b; }
-.grupo > h2 { color: var(--accent); font-size: 1.3rem; display: flex; align-items: center; gap: 10px; }
+.correcoes { --accent: #e9c886; grid-column: 1 / -1; }
+.grupo > h2, .grupo > h3 { color: var(--accent); font-size: 1.3rem; display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
 .contagem { border: 1px solid currentColor; border-radius: 20px; padding: 2px 8px; font-size: .8rem; }
 .descricao-grupo { margin: 0 0 18px; font-size: .85rem; }
 .mudanca { padding: 18px; margin-bottom: 12px; border: 1px solid #334058; border-radius: 6px; background: #101d32; }
-.mudanca h3 { margin: 0 0 10px; font-size: 1rem; }
+.mudanca h3, .mudanca h4 { margin: 0 0 10px; font-size: 1rem; }
 .mudanca ul { padding-left: 20px; margin: 0; color: #c5c9d1; font-size: .9rem; line-height: 1.6; }
 .mudanca li + li { margin-top: 6px; }
 .vazio { padding: 22px; border: 1px dashed #334058; border-radius: 6px; font-size: .9rem; }
